@@ -537,11 +537,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4139515613120910, guid: 971001f100d07ad499cba78bd609d274, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 21.92
+      value: 24.45
       objectReference: {fileID: 0}
     - target: {fileID: 4139515613120910, guid: 971001f100d07ad499cba78bd609d274, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 15.21
+      value: 17.01
       objectReference: {fileID: 0}
     - target: {fileID: 4139515613120910, guid: 971001f100d07ad499cba78bd609d274, type: 2}
       propertyPath: m_LocalPosition.z
@@ -575,7 +575,7 @@ Prefab:
     - target: {fileID: 114657287692435562, guid: 971001f100d07ad499cba78bd609d274,
         type: 2}
       propertyPath: TiempoEntreKunai
-      value: 0.01
+      value: 0.011
       objectReference: {fileID: 0}
     - target: {fileID: 114657287692435562, guid: 971001f100d07ad499cba78bd609d274,
         type: 2}
@@ -629,7 +629,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 951568027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.6, y: 24.9, z: 0}
+  m_LocalPosition: {x: 54.72, y: 26.14, z: 0}
   m_LocalScale: {x: 1, y: 0.98, z: 1}
   m_Children:
   - {fileID: 1431110519}
