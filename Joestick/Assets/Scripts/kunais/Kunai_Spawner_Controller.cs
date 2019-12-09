@@ -5,12 +5,15 @@ using UnityEngine;
 public class Kunai_Spawner_Controller : MonoBehaviour
 {
 
-    public float cantidadMaxKunai;
+    
     public float TiempoEntreKunai;
     public GameObject KunaiPrefab;
+    public bool puedeTirar;
+     public Vector3 direccionATirar;
 
     private float clockInterno;
-    private float contadorInterno;
+    
+
 
     // Use this for initialization
     void Start()
@@ -21,21 +24,26 @@ public class Kunai_Spawner_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (clockInterno >= TiempoEntreKunai && contadorInterno<= cantidadMaxKunai)
+        if (puedeTirar)
         {
-            clockInterno = 0;
-            InvocaKunai(this.transform.position);
-            contadorInterno++;
+            if (clockInterno >= TiempoEntreKunai )
+            {
+                clockInterno = 0;
+                InvocaKunai(this.transform.position);
+                
+            }
+            clockInterno = clockInterno + Time.deltaTime;
         }
-        clockInterno = clockInterno + Time.deltaTime;
-        
+
+
     }
 
     public void InvocaKunai(Vector3 posicion)
     {
         GameObject a = Instantiate(KunaiPrefab) as GameObject;
         a.transform.position = posicion;
+        a.GetComponent<Kunai_Controller>().Objecto_Fundador = this.transform.parent.gameObject;
+        a.GetComponent<Kunai_Controller>().direccionATirar = this.direccionATirar;
         Destroy(a, 3.0f);
     }
 }
