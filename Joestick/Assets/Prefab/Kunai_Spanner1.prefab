@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08a0b4cda4e8ef4b93e01ca4503640d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantidadMaxKunai: 0
-  TiempoEntreKunai: 0
+  cantidadMaxKunai: 10
+  TiempoEntreKunai: 0.01
   KunaiPrefab: {fileID: 1212143289067010, guid: d237e72df9451984bbdc1e7b9338a593,
     type: 2}

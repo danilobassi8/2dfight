@@ -570,7 +570,7 @@ Prefab:
     - target: {fileID: 114657287692435562, guid: 971001f100d07ad499cba78bd609d274,
         type: 2}
       propertyPath: cantidadMaxKunai
-      value: Infinity
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114657287692435562, guid: 971001f100d07ad499cba78bd609d274,
         type: 2}
