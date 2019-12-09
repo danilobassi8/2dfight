@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class Player_Ataques : MonoBehaviour
 {
-   
+
     public GameObject prefabChidori;
     public string nombreAnimacion;
     public float tiempoChidori;
 
+    
     private _Joestick joestick;
+    private Animator animator;
+    //variables para el chidori
     private bool doingChidori, chidorispawned;
     public float contadorChidori;
     private string PlayerName;
     private bool instanciaChidori;
-    Animator animator;
-
+    
+    //variables para los kunais
+    private GameObject kunaiSpawner;
+    private bool tirandoKunais;
 
     AnimatorClipInfo[] m_CurrentClipInfo;
 
@@ -26,9 +31,9 @@ public class Player_Ataques : MonoBehaviour
 
         animator = GetComponent<Animator>(); ;
         chidorispawned = false;
-        
-        joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
 
+        joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
+        kunaiSpawner = this.transform.Find("KunaiSpawner").gameObject;
 
 
         contadorChidori = -1;
@@ -42,6 +47,7 @@ public class Player_Ataques : MonoBehaviour
         nombreAnimacion = AnimacionActual(animator);
 
         Manejador_Chidori();
+        Manejador_Kuanis();
 
     }
 
@@ -99,5 +105,18 @@ public class Player_Ataques : MonoBehaviour
 
 
 
+    }
+
+    public void Manejador_Kuanis()
+    {
+       
+        if (doingChidori == false && (joestick.direccionJoestickDerecho.x != 0 || joestick.direccionJoestickDerecho.y != 0) && joestick.b2) //cambiar el jstk.b2 por un R2 o L2
+        {
+
+            animator.SetBool("tirandoKunais",true);
+            kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().direccionATirar = new Vector3(joestick.direccionJoestickDerecho.x, joestick.direccionJoestickDerecho.y, 0);
+            kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().puedeTirar = true;
+
+        }
     }
 }

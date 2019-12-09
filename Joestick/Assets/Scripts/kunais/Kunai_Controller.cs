@@ -15,6 +15,7 @@ public class Kunai_Controller : MonoBehaviour
     public float maxDeltaY;
     public Sound[] sounds;
     public GameObject Objecto_Fundador;
+    public Vector3 direccionATirar;
 
     private Vector3 gravedad, velocidad;
     private float deltaX, deltaY;
@@ -97,7 +98,7 @@ public class Kunai_Controller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("toque algo");
+        
            if (col.gameObject.tag != "Player")
         {
             lanzando = false;
@@ -108,18 +109,19 @@ public class Kunai_Controller : MonoBehaviour
             string padre = saberPadre(col.gameObject);
             if (padre == Objecto_Fundador.name)
             {
-
+                    //choca al padre. no hacer nada
 
             }
             else // aca se va a rellenar lo que pasa cuando choque con algun personaje que no sea el padre.
             {
-                //
+                
             }
 
         }
     }
 
-    public string saberPadre(GameObject objeto)
+    public string saberPadre(GameObject objeto) //funcion recursiva que sirve para saber quien es el objeto padre de un determinado objeto.
+    //esta funcion solamente sirve para objetos con el Tag "Player" y que se llamen Player"x" ... con x = 1,2,3,4
     {
         string s = "test";
         s = objeto.name;
@@ -132,6 +134,7 @@ public class Kunai_Controller : MonoBehaviour
         {
             while (s != "Player1" || s != "Player2" || s != "Player3" || s != "Player4")
             {
+                
                 return saberPadre(objeto.transform.parent.gameObject);
             }
         }
