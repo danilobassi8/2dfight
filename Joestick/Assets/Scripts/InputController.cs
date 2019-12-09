@@ -62,19 +62,19 @@ public class InputController : MonoBehaviour
         }
         if (Input.GetButton("triggerLT"))
         {
-            Debug.Log("trigger");
+            Debug.Log("LT");
         }
         if (Input.GetButton("triggerLB"))
         {
-            Debug.Log("trigger");
+            Debug.Log("LB");
         }
         if (Input.GetButton("triggerRT"))
         {
-            Debug.Log("trigger");
+            Debug.Log("RT");
         }
         if (Input.GetButton("triggerRB"))
         {
-            Debug.Log("trigger");
+            Debug.Log("RB");
         }
         //Flechas
         if (Input.GetAxisRaw("flechasHorizontal") == -1)
