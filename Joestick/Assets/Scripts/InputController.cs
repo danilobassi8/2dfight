@@ -62,19 +62,34 @@ public class InputController : MonoBehaviour
         }
         if (Input.GetButton("triggerLT"))
         {
-            Debug.Log("LT");
+            Joestick1.LT = true;
+        }
+        else
+        {
+            Joestick1.LT = false;
         }
         if (Input.GetButton("triggerLB"))
         {
-            Debug.Log("LB");
+            Joestick1.LB = true;
+        }
+        else
+        {
+            Joestick1.LB = false;
         }
         if (Input.GetButton("triggerRT"))
         {
-            Debug.Log("RT");
+            Joestick1.RT = true;
+        }
+        else
+        {
+            Joestick1.RT = false;
         }
         if (Input.GetButton("triggerRB"))
         {
-            Debug.Log("RB");
+            Joestick1.RB = true;
+        }
+        else{
+            Joestick1.RB = false;
         }
         //Flechas
         if (Input.GetAxisRaw("flechasHorizontal") == -1)
