@@ -19,7 +19,8 @@ public class Player1_controller : MonoBehaviour
     private _Joestick joestick;
     private bool piesTocandoPiso;
     private float ContadorDeSalto;
-
+    private bool mirandoDerecha;
+    private bool miradaActual;
 
     void Start()
     {
@@ -67,6 +68,34 @@ public class Player1_controller : MonoBehaviour
 
         // hace que se mueva para los costados
         float x = joestick.direccionJoestickIzquierdo.x;
+        if (x < 0)
+        {
+            mirandoDerecha = false;
+        }
+        else
+        {
+            mirandoDerecha = true;
+        }
+
+        if (miradaActual == true && mirandoDerecha == true)
+        {
+            //nada. iguales
+        }
+        else if (miradaActual == true && mirandoDerecha == false)
+        {
+            miradaActual = false;
+            Flip("izq");
+        }
+        else if (miradaActual == false && mirandoDerecha == false)
+        {
+            // nada. iguales
+        }
+        else if (miradaActual == false && mirandoDerecha == true)
+        {
+            miradaActual = true;
+            Flip("der");
+        }
+
 
         if (joestick.direccionJoestickIzquierdo.y < 0 && isGrounded == false)
         {
@@ -86,5 +115,15 @@ public class Player1_controller : MonoBehaviour
     }
 
 
-
+    public void Flip(string lado)
+    {
+        if (lado == "der")
+        {
+            transform.localScale = new Vector3(1,1,1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1,1,1);
+        }
+    }
 }

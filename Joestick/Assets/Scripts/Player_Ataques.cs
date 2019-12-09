@@ -8,8 +8,8 @@ public class Player_Ataques : MonoBehaviour
     public GameObject prefabChidori;
     public string nombreAnimacion;
     public float tiempoChidori;
+    public float tiempoKunais;
 
-    
     private _Joestick joestick;
     private Animator animator;
     //variables para el chidori
@@ -17,10 +17,11 @@ public class Player_Ataques : MonoBehaviour
     public float contadorChidori;
     private string PlayerName;
     private bool instanciaChidori;
-    
+
     //variables para los kunais
     private GameObject kunaiSpawner;
-    private bool tirandoKunais;
+    private bool doingKunais = false;
+    public float clockKunais;
 
     AnimatorClipInfo[] m_CurrentClipInfo;
 
@@ -37,7 +38,7 @@ public class Player_Ataques : MonoBehaviour
 
 
         contadorChidori = -1;
-
+        clockKunais = -1;
     }
 
 
@@ -109,14 +110,36 @@ public class Player_Ataques : MonoBehaviour
 
     public void Manejador_Kuanis()
     {
-       
-        if (doingChidori == false && (joestick.direccionJoestickDerecho.x != 0 || joestick.direccionJoestickDerecho.y != 0) && joestick.b2) //cambiar el jstk.b2 por un R2 o L2
+        if (joestick.LT && doingChidori == false && clockKunais < 0)
         {
-
-            animator.SetBool("tirandoKunais",true);
-            kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().direccionATirar = new Vector3(joestick.direccionJoestickDerecho.x, joestick.direccionJoestickDerecho.y, 0);
+            doingKunais = true;
+            clockKunais = tiempoKunais;
+        }
+        if (doingKunais && clockKunais >= 0)
+        {
+            clockKunais -= Time.deltaTime;
+            
+            animator.SetBool("tirandoKunais", true);
+            animator.Play("Player_lanzando");
             kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().puedeTirar = true;
 
+            if (joestick.direccionJoestickDerecho.x != 0 || joestick.direccionJoestickDerecho.y != 0) // si se elije direccion de tirada
+            {
+                kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().direccionATirar = new Vector3(joestick.direccionJoestickDerecho.x, joestick.direccionJoestickDerecho.y, 0);
+            }
+            else
+            {
+                
+            }
+
+
+        }
+        else
+        {
+            doingKunais = false;
+            animator.SetBool("tirandoKunais",false);
+            
+            kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().puedeTirar = false;
         }
     }
 }

@@ -646,8 +646,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 951568027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.72, y: 26.14, z: 0}
-  m_LocalScale: {x: 1, y: 0.98, z: 1}
+  m_LocalPosition: {x: -1.08, y: -0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1431110519}
   - {fileID: 1405650059}
@@ -714,7 +714,9 @@ MonoBehaviour:
     type: 2}
   nombreAnimacion: 
   tiempoChidori: 4
+  tiempoKunais: 1
   contadorChidori: 0
+  clockKunais: 0
 --- !u!1 &968551203
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,7 +906,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1431110518}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.36, y: 0.29, z: -1.074895}
+  m_LocalPosition: {x: -5.51, y: 0.47, z: -1.074895}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 951568029}
