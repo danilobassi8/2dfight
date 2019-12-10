@@ -13,21 +13,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-<<<<<<< HEAD
     m_Controller: {fileID: 9100000}
-=======
-    m_Controller: {fileID: 0}
->>>>>>> 446d00c0996dfb4cabf43b54302eb25c03d9a940
   - m_Name: tirandoKunais
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-<<<<<<< HEAD
     m_Controller: {fileID: 9100000}
-=======
-    m_Controller: {fileID: 0}
->>>>>>> 446d00c0996dfb4cabf43b54302eb25c03d9a940
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -102,15 +94,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-<<<<<<< HEAD
   m_TransitionDuration: 0.07268596
   m_TransitionOffset: 0
   m_ExitTime: 0.9330821
-=======
-  m_TransitionDuration: 0.17288017
-  m_TransitionOffset: 0
-  m_ExitTime: 0.49320525
->>>>>>> 446d00c0996dfb4cabf43b54302eb25c03d9a940
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -123,11 +109,7 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< HEAD
   - m_ConditionMode: 1
-=======
-  - m_ConditionMode: 3
->>>>>>> 446d00c0996dfb4cabf43b54302eb25c03d9a940
     m_ConditionEvent: chidori_summon
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
