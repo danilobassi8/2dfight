@@ -21,7 +21,7 @@ public class Chidori_sequirPlayer : MonoBehaviour
     {
         if (!test)
         {
-            posicionSeguir = GameObject.Find(playerName).GetComponent<Transform>().Find("mano IZQ").transform.position;
+            posicionSeguir = GameObject.Find(playerName).GetComponent<Transform>().Find("cuerpo").GetComponent<Transform>().Find("mano IZQ").transform.position;
             posicionSeguir.z = posicionSeguir.z -2;
             this.transform.position = posicionSeguir;
 
