@@ -84,7 +84,7 @@ public class Player_Ataques : MonoBehaviour
 
             my_chidori.GetComponent<Chidori_sequirPlayer>().test = false;
             my_chidori.name = PlayerName + "_Chidori";
-            my_chidori.transform.position = GameObject.Find(PlayerName).GetComponent<Transform>().Find("mano IZQ").transform.position;
+            my_chidori.transform.position = GameObject.Find(PlayerName).GetComponent<Transform>().Find("cuerpo").GetComponent<Transform>().Find("mano IZQ").transform.position;
 
 
         }
