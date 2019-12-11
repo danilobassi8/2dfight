@@ -16,7 +16,7 @@ public class Player1_controller : MonoBehaviour
     public float saltoHorizontal;
 
 
-    private _Joestick joestick;
+    public _Joestick joestick;
     private bool piesTocandoPiso;
     private float ContadorDeSalto;
     private bool mirandoDerecha;
@@ -26,7 +26,7 @@ public class Player1_controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
-
+        
 
     }
 
@@ -68,35 +68,21 @@ public class Player1_controller : MonoBehaviour
 
         // hace que se mueva para los costados
         float x = joestick.direccionJoestickIzquierdo.x;
+        
         if (x < 0)
         {
             mirandoDerecha = false;
-        }
-        else
-        {
-            mirandoDerecha = true;
-        }
-
-        if (miradaActual == true && mirandoDerecha == true)
-        {
-            //nada. iguales
-        }
-        else if (miradaActual == true && mirandoDerecha == false)
-        {
-            miradaActual = false;
             Flip("izq");
         }
-        else if (miradaActual == false && mirandoDerecha == false)
+        else if(x>0)
         {
-            // nada. iguales
-        }
-        else if (miradaActual == false && mirandoDerecha == true)
-        {
-            miradaActual = true;
+            mirandoDerecha = true;
             Flip("der");
         }
 
+        
 
+        //codigo para el salto.
         if (joestick.direccionJoestickIzquierdo.y < 0 && isGrounded == false)
         {
             Vector3 move = new Vector3(x * speed, -1 * fuerzaBajada, 0f);

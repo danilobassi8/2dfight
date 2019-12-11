@@ -8,8 +8,7 @@ public class Kunai_Controller : MonoBehaviour
 
 
 
-    public float velocidadInicialEnX;
-    public float VelocidadInicialEnY;
+    public float velocidadKunai;
     public float aceleracionGravedad;
     public float maxDeltaX;
     public float maxDeltaY;
@@ -39,16 +38,34 @@ public class Kunai_Controller : MonoBehaviour
 
     void Start()
     {
+        direccionATirar = this.Objecto_Fundador.GetComponent<Transform>().Find("KunaiSpawner").GetComponent<Kunai_Spawner_Controller>().direccionATirar;
+
         deltaX = UnityEngine.Random.Range(0, maxDeltaX);
         deltaY = UnityEngine.Random.Range(-maxDeltaY, maxDeltaY);
         gravedad = new Vector3(0, aceleracionGravedad, 0);
-        velocidad = new Vector3(velocidadInicialEnX + deltaX, VelocidadInicialEnY + deltaY, 0);
+
+        if (direccionATirar.x != 0 && direccionATirar.y != 0)
+            velocidad = new Vector3((velocidadKunai + deltaX) * direccionATirar.x, (velocidadKunai + deltaY) * direccionATirar.y, 0);
+        else
+        {
+            if (Objecto_Fundador.transform.localScale.x < 0) // si mira para la izq
+            {
+                velocidad = new Vector3((velocidadKunai + deltaX) * -1, (velocidadKunai + deltaY) * direccionATirar.y, 0);
+            }
+            else
+            {
+                velocidad = new Vector3((velocidadKunai + deltaX) * 1, (velocidadKunai + deltaY) * direccionATirar.y, 0);
+            }
+        }
+
 
         //reproduce sonido.
         this.PlaySound("Kunai" + UnityEngine.Random.Range(1, 5).ToString());
 
 
         lanzando = true;
+
+        Destroy(this.gameObject, 4f);
     }
 
 
@@ -91,15 +108,12 @@ public class Kunai_Controller : MonoBehaviour
         s.source.PlayOneShot(s.clip, 1);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        
-    }
+
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        
-           if (col.gameObject.tag != "Player")
+
+        if (col.gameObject.tag != "Player")
         {
             lanzando = false;
             posicionFinal = this.transform.position;
@@ -109,12 +123,12 @@ public class Kunai_Controller : MonoBehaviour
             string padre = saberPadre(col.gameObject);
             if (padre == Objecto_Fundador.name)
             {
-                    //choca al padre. no hacer nada
+                //choca al padre. no hacer nada
 
             }
             else // aca se va a rellenar lo que pasa cuando choque con algun personaje que no sea el padre.
             {
-                
+
             }
 
         }
@@ -134,8 +148,8 @@ public class Kunai_Controller : MonoBehaviour
         {
             while (s != "Player1" || s != "Player2" || s != "Player3" || s != "Player4")
             {
-                
-                return saberPadre(objeto.transform.parent.gameObject);
+
+                s = saberPadre(objeto.transform.parent.gameObject);
             }
         }
         return s;

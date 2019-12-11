@@ -257,8 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b85544b455ffa43b6fa292971e6bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadInicialEnX: 80
-  VelocidadInicialEnY: 10
+  velocidadKunai: 150
   aceleracionGravedad: -9.8
   maxDeltaX: 20
   maxDeltaY: 10
@@ -289,7 +288,7 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   Objecto_Fundador: {fileID: 0}
-  direccionATirar: {x: 0, y: 0, z: 0}
+  direccionATirar: {x: 1, y: 1, z: 0}
 --- !u!212 &212488848610113686
 SpriteRenderer:
   m_ObjectHideFlags: 1
