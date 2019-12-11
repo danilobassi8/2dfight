@@ -15,14 +15,22 @@ public class Kunai_Controller : MonoBehaviour
     public Sound[] sounds;
     public GameObject Objecto_Fundador;
     public Vector3 direccionATirar;
+    public float probabilidadDeMantenerseSano;
+    public float factorAmortiguamiento;
+
+
 
     private Vector3 gravedad, velocidad;
     private float deltaX, deltaY;
+    private bool kunaiRoto;
 
 
     private bool lanzando;
     private Vector3 posicionFinal;
-
+    private Vector3 velocidadPostChoque;
+    private bool bandera1;
+    private float x, y;
+    private float randomDirection;
 
     void Awake()
     {
@@ -38,10 +46,22 @@ public class Kunai_Controller : MonoBehaviour
 
     void Start()
     {
+        float r = UnityEngine.Random.Range(0f, 1f);
+        if (r < 0.5) //se usa solamente si el kunai se rompe
+        {
+            randomDirection = 1;
+        }
+        else
+        {
+            randomDirection = -1;
+        }
+
+
         direccionATirar = this.Objecto_Fundador.GetComponent<Transform>().Find("KunaiSpawner").GetComponent<Kunai_Spawner_Controller>().direccionATirar;
 
         deltaX = UnityEngine.Random.Range(0, maxDeltaX);
         deltaY = UnityEngine.Random.Range(-maxDeltaY, maxDeltaY);
+
         gravedad = new Vector3(0, aceleracionGravedad, 0);
 
         if (direccionATirar.x != 0 && direccionATirar.y != 0)
@@ -94,9 +114,32 @@ public class Kunai_Controller : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(rotationVector);
         }
-        else
+        else if (kunaiRoto == false)
         {
             this.transform.position = posicionFinal;
+        }
+        else // cuando el kunai se rompe.
+        {
+            if (bandera1)//primera vez que entra en la condicion.
+            {
+                velocidadPostChoque = -1 * velocidad * factorAmortiguamiento;
+                gravedad = new Vector3(0, aceleracionGravedad * 500, 0);
+                x = velocidad.x;
+                y = velocidad.y;
+            }
+            else
+            {
+                this.transform.Rotate(0, 0, UnityEngine.Random.Range(12, 22)); //la hace rotar.
+                /*
+                velocidad += gravedad*Time.deltaTime;
+                transform.position += -velocidad*Time.deltaTime*factorAmortiguamiento;
+                */
+
+                x = randomDirection * UnityEngine.Random.Range(0f, 0.8f) * factorAmortiguamiento;
+                y = y - aceleracionGravedad * Time.deltaTime * factorAmortiguamiento;
+                transform.position = new Vector3(transform.position.x - x, transform.position.y - y, transform.position.z);
+            }
+
         }
 
     }
@@ -122,7 +165,15 @@ public class Kunai_Controller : MonoBehaviour
             if (col.gameObject.tag != "Player")
             {
                 lanzando = false;
-                posicionFinal = this.transform.position;
+
+                if (UnityEngine.Random.Range(0f, 1f) > probabilidadDeMantenerseSano)
+                {
+                    KunaiSeRompe();
+                }
+                else
+                {
+                    posicionFinal = this.transform.position;
+                }
             }
             else
             {
@@ -136,10 +187,16 @@ public class Kunai_Controller : MonoBehaviour
 
     }
 
-    public string saberPadre(GameObject objeto) //funcion recursiva que sirve para saber quien es el objeto padre de un determinado objeto.
-    //esta funcion solamente sirve para objetos con el Tag "Player" y que se llamen Player"x" ... con x = 1,2,3,4
+    public string saberPadre(GameObject objeto)
     {
-        string s = objeto.transform.root.gameObject.name;
-        return s;
+        return objeto.transform.root.gameObject.name;
+    }
+
+    public void KunaiSeRompe()
+    {
+        kunaiRoto = true;
+
+
+
     }
 }
