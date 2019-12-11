@@ -56,7 +56,7 @@ public class Kunai_Controller : MonoBehaviour
             randomDirection = -1;
         }
 
-
+        bandera1 = true;
         direccionATirar = this.Objecto_Fundador.GetComponent<Transform>().Find("KunaiSpawner").GetComponent<Kunai_Spawner_Controller>().direccionATirar;
 
         deltaX = UnityEngine.Random.Range(0, maxDeltaX);
@@ -122,19 +122,15 @@ public class Kunai_Controller : MonoBehaviour
         {
             if (bandera1)//primera vez que entra en la condicion.
             {
-                velocidadPostChoque = -1 * velocidad * factorAmortiguamiento;
-                gravedad = new Vector3(0, aceleracionGravedad * 500, 0);
-                x = velocidad.x;
-                y = velocidad.y;
+                PlaySound("sonidoKunaiRoto_" + UnityEngine.Random.Range(0, 3).ToString());
+                Debug.Log("deberia repor");
+                bandera1 = false;
+
             }
             else
             {
-                this.transform.Rotate(0, 0, UnityEngine.Random.Range(12, 22)); //la hace rotar.
-                /*
-                velocidad += gravedad*Time.deltaTime;
-                transform.position += -velocidad*Time.deltaTime*factorAmortiguamiento;
-                */
 
+                this.transform.Rotate(0, 0, UnityEngine.Random.Range(12, 22));                          //la hace rotar.
                 x = randomDirection * UnityEngine.Random.Range(0f, 0.8f) * factorAmortiguamiento;
                 y = y - aceleracionGravedad * Time.deltaTime * factorAmortiguamiento;
                 transform.position = new Vector3(transform.position.x - x, transform.position.y - y, transform.position.z);
@@ -195,8 +191,9 @@ public class Kunai_Controller : MonoBehaviour
     public void KunaiSeRompe()
     {
         kunaiRoto = true;
-
-
-
+        /*
+        Activa el booleano de arriba y despues permite que se realicen cosas desde el Update();
+        ver comentario "Cuando se rompe".        
+        */
     }
 }
