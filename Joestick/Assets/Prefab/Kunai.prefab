@@ -257,10 +257,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b85544b455ffa43b6fa292971e6bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadKunai: 70
+  velocidadKunai: 80
   aceleracionGravedad: -8
   maxDeltaX: 40
-  maxDeltaY: 20
+  maxDeltaY: 10
   sounds:
   - clip: {fileID: 8300000, guid: f61f116f5e804ff4bb5fc1768777d854, type: 3}
     Nombre: 

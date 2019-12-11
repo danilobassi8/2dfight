@@ -757,9 +757,9 @@ MonoBehaviour:
   prefabChidori: {fileID: 1058883953233308, guid: 9689cc3f478f6234ca7e62595144d930,
     type: 2}
   nombreAnimacion: 
-  tiempoChidori: 4
-  tiempoKunais: 1
-  HabilitacionKunai: 3
+  tiempoChidori: 6
+  tiempoKunais: 2
+  HabilitacionKunai: 1
   contadorChidori: 0
   clockHabilitacionKunai: 2
 --- !u!1 &968551203

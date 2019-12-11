@@ -13,6 +13,7 @@ public class Player_Ataques : MonoBehaviour
 
     private _Joestick joestick;
     private Animator animator;
+    private Rigidbody2D rb;
     //variables para el chidori
     private bool doingChidori, chidorispawned;
     public float contadorChidori;
@@ -38,7 +39,7 @@ public class Player_Ataques : MonoBehaviour
 
         joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
         kunaiSpawner = this.transform.Find("KunaiSpawner").gameObject;
-
+        rb = this.GetComponent<Rigidbody2D>();
 
         contadorChidori = -1;
         clockKunais = -1;
@@ -127,6 +128,9 @@ public class Player_Ataques : MonoBehaviour
         {
             clockKunais -= Time.deltaTime;
 
+            //  agregado para que se quede en el lugar al tirar los kunais
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            //
             animator.SetBool("tirandoKunais", true);
             animator.Play("Player_lanzando");
             kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().puedeTirar = true;
@@ -147,6 +151,9 @@ public class Player_Ataques : MonoBehaviour
             doingKunais = false;
             animator.SetBool("tirandoKunais", false);
             clockKunais = -1;
+            //le vuelve a afectar la gravedad
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            //
 
             kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().puedeTirar = false;
         }
