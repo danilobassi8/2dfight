@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de224baadbd184469c00eac4831fb72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabChidori: {fileID: 1058883953233308, guid: 9689cc3f478f6234ca7e62595144d930,
+  prefabChidori: {fileID: 1342219623371740, guid: 9689cc3f478f6234ca7e62595144d930,
     type: 2}
   nombreAnimacion: 
   tiempoChidori: 6
@@ -762,7 +762,6 @@ MonoBehaviour:
   HabilitacionKunai: 1
   contadorChidori: 0
   clockHabilitacionKunai: 2
-  b: 1
 --- !u!1 &968551203
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,9 @@ public class Chidori_sequirPlayer : MonoBehaviour
 
     private string playerName;
     Vector3 posicionSeguir;
+    public GameObject PrefabParticulas;
+    
+    private GameObject particulas;
 
 
     void Start()
@@ -15,6 +18,8 @@ public class Chidori_sequirPlayer : MonoBehaviour
         if (!test)
             playerName = this.name.Substring(0, 7); //veo quien es el player con el nombre del chidori.
 
+        particulas = Instantiate(PrefabParticulas,this.gameObject.transform.position, Quaternion.identity) as GameObject;
+        particulas.GetComponent<chidori_particulas_controller>().master = this.gameObject;
     }
 
     void Update()
