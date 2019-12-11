@@ -14,6 +14,7 @@ public class Player_Ataques : MonoBehaviour
     private _Joestick joestick;
     private Animator animator;
     private Rigidbody2D rb;
+    private GameObject chekeadorPiso;
     //variables para el chidori
     private bool doingChidori, chidorispawned;
     public float contadorChidori;
@@ -26,6 +27,7 @@ public class Player_Ataques : MonoBehaviour
     private float clockKunais;
     public float clockHabilitacionKunai;
 
+    private bool tocandoPiso;
 
     AnimatorClipInfo[] m_CurrentClipInfo;
 
@@ -40,6 +42,7 @@ public class Player_Ataques : MonoBehaviour
         joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
         kunaiSpawner = this.transform.Find("KunaiSpawner").gameObject;
         rb = this.GetComponent<Rigidbody2D>();
+
 
         contadorChidori = -1;
         clockKunais = -1;
@@ -76,7 +79,7 @@ public class Player_Ataques : MonoBehaviour
 
     public void Manejador_Chidori()
     {
-        if (joestick.b4 && chidorispawned == false && AnimacionActual(animator) != "player1_chidori_middle") //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
+        if (joestick.b4 && chidorispawned == false && AnimacionActual(animator) != "player1_chidori_middle" && doingKunais == false) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
         {
             doingChidori = true;
             animator.SetBool("chidori_summon", true);
@@ -116,21 +119,32 @@ public class Player_Ataques : MonoBehaviour
 
     public void Manejador_Kuanis()
     {
-        if (joestick.LT && doingChidori == false && clockKunais < 0 && clockHabilitacionKunai <0)
+        tocandoPiso = this.transform.Find("ChekeadorPiso").gameObject.GetComponent<chekeadorPiso>().tocandoPiso;
+
+        if (joestick.LT && doingChidori == false && clockKunais < 0 && clockHabilitacionKunai < 0)
         {
             doingKunais = true;
             clockHabilitacionKunai = HabilitacionKunai;
             clockKunais = tiempoKunais;
         }
-        
-        
+
+
         if (doingKunais && clockKunais >= 0 && clockHabilitacionKunai > 0)
         {
             clockKunais -= Time.deltaTime;
 
-            //  agregado para que se quede en el lugar al tirar los kunais
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-            //
+
+            if (tocandoPiso)
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
+            else
+            {
+                if (this.joestick.direccionJoestickIzquierdo == new Vector3(0, 0, 0) && GetComponent<Rigidbody2D>().velocity.y > 0 && joestick.LT == false)
+                    rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            }
+
+
             animator.SetBool("tirandoKunais", true);
             animator.Play("Player_lanzando");
             kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().puedeTirar = true;
@@ -160,11 +174,11 @@ public class Player_Ataques : MonoBehaviour
         if (clockHabilitacionKunai >= 0)
         {
             clockHabilitacionKunai -= Time.deltaTime;
-            
+
         }
         else
         {
-            
+
         }
     }
 }

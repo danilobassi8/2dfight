@@ -678,7 +678,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 951568027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: -0.8, z: 0}
+  m_LocalPosition: {x: 0.5, y: -3.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 162590425}
@@ -758,10 +758,11 @@ MonoBehaviour:
     type: 2}
   nombreAnimacion: 
   tiempoChidori: 6
-  tiempoKunais: 2
+  tiempoKunais: 1.3
   HabilitacionKunai: 1
   contadorChidori: 0
   clockHabilitacionKunai: 2
+  b: 1
 --- !u!1 &968551203
 GameObject:
   m_ObjectHideFlags: 0
