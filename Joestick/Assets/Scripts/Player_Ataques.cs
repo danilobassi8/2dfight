@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class Player_Ataques : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class Player_Ataques : MonoBehaviour
     public float tiempoChidori;
     public float tiempoKunais;
     public float HabilitacionKunai;
+    public Sound[] sounds;
 
     private _Joestick joestick;
     private Animator animator;
@@ -20,6 +23,7 @@ public class Player_Ataques : MonoBehaviour
     public float contadorChidori;
     private string PlayerName;
     private bool instanciaChidori;
+    private bool banderaSonido;
 
     //variables para los kunais
     private GameObject kunaiSpawner;
@@ -31,6 +35,22 @@ public class Player_Ataques : MonoBehaviour
 
     AnimatorClipInfo[] m_CurrentClipInfo;
 
+     void Awake()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+
+            s.source.volume = s.volumen;
+            s.source.pitch = s.pitch;
+        }
+    }
+    public void PlaySound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.clip.name == name);
+        s.source.PlayOneShot(s.clip, 1);
+    }
 
     void Start()
     {
@@ -48,6 +68,7 @@ public class Player_Ataques : MonoBehaviour
         clockKunais = -1;
         clockHabilitacionKunai = -1;
         HabilitacionKunai = HabilitacionKunai + tiempoKunais;
+        banderaSonido = true;
     }
 
 
@@ -82,9 +103,19 @@ public class Player_Ataques : MonoBehaviour
         if (joestick.b4 && chidorispawned == false && AnimacionActual(animator) != "player1_chidori_middle" && doingKunais == false) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
         {
             doingChidori = true;
+
             animator.SetBool("chidori_summon", true);
             animator.Play("Player1_chidori");
+            if (banderaSonido)
+            {
+                PlaySound("manos");
+                banderaSonido = false;
+            }
+
+
             contadorChidori = tiempoChidori;
+
+
         }
         if (doingChidori && nombreAnimacion == "player1_chidori_middle" && chidorispawned == false)
         {
@@ -108,6 +139,7 @@ public class Player_Ataques : MonoBehaviour
                 GameObject.Destroy(GameObject.Find(PlayerName + "_Chidori"));
                 chidorispawned = false;
                 doingChidori = false;
+                banderaSonido = true;
                 animator.SetBool("chidori_summon", false);
             }
 

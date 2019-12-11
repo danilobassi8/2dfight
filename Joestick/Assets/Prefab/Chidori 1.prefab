@@ -104,6 +104,12 @@ MonoBehaviour:
   test: 1
   PrefabParticulas: {fileID: 1211469154471110, guid: abf96c78fe6e7b74eac5bc9856887280,
     type: 2}
+  sounds:
+  - clip: {fileID: 8300000, guid: cfd9df08a03bda04c837c85a4e5aa0a0, type: 3}
+    Nombre: 
+    volumen: 1
+    pitch: 1
+    source: {fileID: 0}
 --- !u!212 &212237030852919224
 SpriteRenderer:
   m_ObjectHideFlags: 1

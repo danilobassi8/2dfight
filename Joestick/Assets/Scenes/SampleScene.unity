@@ -760,6 +760,12 @@ MonoBehaviour:
   tiempoChidori: 6
   tiempoKunais: 1.3
   HabilitacionKunai: 1
+  sounds:
+  - clip: {fileID: 8300000, guid: bd00243164ef6774890036ce71a403a9, type: 3}
+    Nombre: 
+    volumen: 1
+    pitch: 1
+    source: {fileID: 0}
   contadorChidori: 0
   clockHabilitacionKunai: 2
 --- !u!1 &968551203

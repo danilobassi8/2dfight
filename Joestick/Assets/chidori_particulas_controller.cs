@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class chidori_particulas_controller : MonoBehaviour
 {
 
@@ -10,7 +11,9 @@ public class chidori_particulas_controller : MonoBehaviour
 
     void Start()
     {
-		this.transform.position = master.transform.position;
+        this.transform.position = master.transform.position;
+    
+
     }
 
     // Update is called once per frame
@@ -18,5 +21,7 @@ public class chidori_particulas_controller : MonoBehaviour
     {
         if (master != null)
             this.transform.position = master.transform.position;
+
+
     }
 }
