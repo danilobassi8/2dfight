@@ -112,46 +112,34 @@ public class Kunai_Controller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
-        if (col.gameObject.tag != "Player")
+        string padre = saberPadre(col.gameObject);
+        if (padre == Objecto_Fundador.name)
         {
-            lanzando = false;
-            posicionFinal = this.transform.position;
+            //que pasa si choca con el padre.
         }
         else
         {
-            string padre = saberPadre(col.gameObject);
-            if (padre == Objecto_Fundador.name)
+            if (col.gameObject.tag != "Player")
             {
-                //choca al padre. no hacer nada
+                lanzando = false;
+                posicionFinal = this.transform.position;
+            }
+            else
+            {
+
+                // aca se va a rellenar lo que pasa cuando choque con algun personaje que no sea el padre.
+
 
             }
-            else // aca se va a rellenar lo que pasa cuando choque con algun personaje que no sea el padre.
-            {
-
-            }
-
         }
+
+
     }
 
     public string saberPadre(GameObject objeto) //funcion recursiva que sirve para saber quien es el objeto padre de un determinado objeto.
     //esta funcion solamente sirve para objetos con el Tag "Player" y que se llamen Player"x" ... con x = 1,2,3,4
     {
-        string s = "test";
-        s = objeto.name;
-
-        if (s == "Player1" || s == "Player2" || s == "Player3" || s == "Player4")
-        {
-            return s;
-        }
-        else
-        {
-            while (s != "Player1" || s != "Player2" || s != "Player3" || s != "Player4")
-            {
-
-                s = saberPadre(objeto.transform.parent.gameObject);
-            }
-        }
+        string s = objeto.transform.root.gameObject.name;
         return s;
     }
 }

@@ -569,11 +569,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4139515613120910, guid: 971001f100d07ad499cba78bd609d274, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: 2.22
       objectReference: {fileID: 0}
     - target: {fileID: 4139515613120910, guid: 971001f100d07ad499cba78bd609d274, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.76
+      value: -0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4139515613120910, guid: 971001f100d07ad499cba78bd609d274, type: 2}
       propertyPath: m_LocalPosition.z
@@ -708,6 +708,21 @@ MonoBehaviour:
   tiempo_entre_saltos: 0.3
   fuerzaBajada: 90
   saltoHorizontal: 3.4028235e+38
+  joestick:
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
 --- !u!50 &951568031
 Rigidbody2D:
   serializedVersion: 4
@@ -744,8 +759,9 @@ MonoBehaviour:
   nombreAnimacion: 
   tiempoChidori: 4
   tiempoKunais: 1
+  HabilitacionKunai: 3
   contadorChidori: 0
-  clockKunais: 0
+  clockHabilitacionKunai: 2
 --- !u!1 &968551203
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class Player_Ataques : MonoBehaviour
     public string nombreAnimacion;
     public float tiempoChidori;
     public float tiempoKunais;
+    public float HabilitacionKunai;
 
     private _Joestick joestick;
     private Animator animator;
@@ -21,7 +22,9 @@ public class Player_Ataques : MonoBehaviour
     //variables para los kunais
     private GameObject kunaiSpawner;
     private bool doingKunais = false;
-    public float clockKunais;
+    private float clockKunais;
+    public float clockHabilitacionKunai;
+
 
     AnimatorClipInfo[] m_CurrentClipInfo;
 
@@ -39,6 +42,8 @@ public class Player_Ataques : MonoBehaviour
 
         contadorChidori = -1;
         clockKunais = -1;
+        clockHabilitacionKunai = -1;
+        HabilitacionKunai = HabilitacionKunai + tiempoKunais;
     }
 
 
@@ -110,15 +115,18 @@ public class Player_Ataques : MonoBehaviour
 
     public void Manejador_Kuanis()
     {
-        if (joestick.LT && doingChidori == false && clockKunais < 0)
+        if (joestick.LT && doingChidori == false && clockKunais < 0 && clockHabilitacionKunai <0)
         {
             doingKunais = true;
+            clockHabilitacionKunai = HabilitacionKunai;
             clockKunais = tiempoKunais;
         }
-        if (doingKunais && clockKunais >= 0)
+        
+        
+        if (doingKunais && clockKunais >= 0 && clockHabilitacionKunai > 0)
         {
             clockKunais -= Time.deltaTime;
-            
+
             animator.SetBool("tirandoKunais", true);
             animator.Play("Player_lanzando");
             kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().puedeTirar = true;
@@ -129,7 +137,7 @@ public class Player_Ataques : MonoBehaviour
             }
             else
             {
-                
+
             }
 
 
@@ -137,9 +145,19 @@ public class Player_Ataques : MonoBehaviour
         else
         {
             doingKunais = false;
-            animator.SetBool("tirandoKunais",false);
-            
+            animator.SetBool("tirandoKunais", false);
+            clockKunais = -1;
+
             kunaiSpawner.GetComponent<Kunai_Spawner_Controller>().puedeTirar = false;
+        }
+        if (clockHabilitacionKunai >= 0)
+        {
+            clockHabilitacionKunai -= Time.deltaTime;
+            
+        }
+        else
+        {
+            
         }
     }
 }
