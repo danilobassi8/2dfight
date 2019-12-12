@@ -8,11 +8,13 @@ public class Player_Ataques : MonoBehaviour
 {
 
     public GameObject prefabChidori;
-    public string nombreAnimacion;
+    public string nombreAnimacionActual;
     public float tiempoChidori;
     public float tiempoKunais;
     public float HabilitacionKunai;
     public Sound[] sounds;
+    public bool PuedeDañar;
+    
 
     private _Joestick joestick;
     private Animator animator;
@@ -33,6 +35,8 @@ public class Player_Ataques : MonoBehaviour
     public float clockHabilitacionKunai;
 
     //variables para los ataques normales.
+    private bool banderaPrimerPiña;
+    private bool doingPiñas;
 
     private bool tocandoPiso;
 
@@ -73,13 +77,22 @@ public class Player_Ataques : MonoBehaviour
         HabilitacionKunai = HabilitacionKunai + tiempoKunais;
         banderaSonido = true;
         banderaPrimerCastChidori = true;
+        banderaPrimerPiña = true;
+        PuedeDañar = false;
+
+
+
+
+        doingPiñas = false;
+        doingChidori = false;
+        doingKunais = false;
     }
 
 
     void Update()
     {
 
-        nombreAnimacion = AnimacionActual(animator);
+        nombreAnimacionActual = AnimacionActual(animator);
 
         Manejador_Chidori();
         Manejador_Kuanis();
@@ -106,7 +119,7 @@ public class Player_Ataques : MonoBehaviour
 
     public void Manejador_Chidori()
     {
-        if (joestick.b1 && chidorispawned == false && AnimacionActual(animator) != "player1_chidori_middle" && doingKunais == false && banderaPrimerCastChidori) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
+        if (joestick.b1 && chidorispawned == false && nombreAnimacionActual != "player1_chidori_middle" && doingKunais == false && banderaPrimerCastChidori && doingPiñas == false) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
         {
             doingChidori = true;
             banderaPrimerCastChidori = false;
@@ -124,7 +137,7 @@ public class Player_Ataques : MonoBehaviour
 
 
         }
-        if (doingChidori && nombreAnimacion == "player1_chidori_middle" && chidorispawned == false)
+        if (doingChidori && nombreAnimacionActual == "player1_chidori_middle" && chidorispawned == false)
         {
             chidorispawned = true;
             GameObject my_chidori = GameObject.Instantiate(prefabChidori);
@@ -162,7 +175,7 @@ public class Player_Ataques : MonoBehaviour
     {
         tocandoPiso = this.transform.Find("ChekeadorPiso").gameObject.GetComponent<chekeadorPiso>().tocandoPiso;
 
-        if (joestick.LT && doingChidori == false && clockKunais < 0 && clockHabilitacionKunai < 0)
+        if (joestick.LT && doingChidori == false && doingPiñas == false && clockKunais < 0 && clockHabilitacionKunai < 0)
         {
             doingKunais = true;
             clockHabilitacionKunai = HabilitacionKunai;
@@ -225,9 +238,31 @@ public class Player_Ataques : MonoBehaviour
 
     void Manejador_AtaquesNormales()
     {
-        if (joestick.b4 && doingChidori == false && doingKunais == false)
+        if (joestick.b4 && doingChidori == false && doingKunais == false && banderaPrimerPiña && doingPiñas)
         {
             animator.SetBool("pegandoGeneral", true);
+            banderaPrimerPiña = false;
+            doingPiñas = true;
+        }
+        if (joestick.b4)
+        {
+            // si esta apretando el boton de pegar.
+            if (nombreAnimacionActual == "Player_ataque1")
+            {
+                
+            }
+            if (nombreAnimacionActual == "Player_ataque2")
+            {
+
+            }
+            if (nombreAnimacionActual == "Player_ataque3")
+            {
+
+            }
+            if (nombreAnimacionActual == "Player_ataque4")
+            {
+
+            }
         }
 
     }
@@ -237,7 +272,7 @@ public class Player_Ataques : MonoBehaviour
         //new animation se llama la animacion por defecto.. si, mala mía.
         if (joestick.fabajo && doingChidori == false && doingKunais == false)
         {
-            if ((nombreAnimacion == "New Animation" || nombreAnimacion == "Player_idle_YBAILO"))
+            if ((nombreAnimacionActual == "New Animation" || nombreAnimacionActual == "Player_idle_YBAILO"))
                 animator.SetBool("ybailo", true);
         }
         else
