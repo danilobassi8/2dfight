@@ -16,7 +16,8 @@ public class Camera_controller : MonoBehaviour
     void Update()
     {
         vectorSeguir = objeto_A_Seguir.transform.position;
-		vectorSeguir.z = vectorSeguir.z -150 ;
+		vectorSeguir.z = -200;
+        vectorSeguir.y = vectorSeguir.y + 3;
 		this.transform.position = vectorSeguir;
     }
 }

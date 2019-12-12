@@ -65,16 +65,16 @@ public class Kunai_Controller : MonoBehaviour
         gravedad = new Vector3(0, aceleracionGravedad, 0);
 
         if (direccionATirar.x != 0 && direccionATirar.y != 0)
-            velocidad = new Vector3((velocidadKunai + deltaX) * direccionATirar.x, (velocidadKunai + deltaY) * direccionATirar.y, 0);
+            velocidad = new Vector3((velocidadKunai) * direccionATirar.x + deltaX, (velocidadKunai) * direccionATirar.y + deltaY, 0);
         else
         {
             if (Objecto_Fundador.transform.localScale.x < 0) // si mira para la izq
             {
-                velocidad = new Vector3((velocidadKunai + deltaX) * -1, (velocidadKunai + deltaY) * direccionATirar.y, 0);
+                velocidad = new Vector3((velocidadKunai) * -1 + deltaX, (velocidadKunai) * direccionATirar.y + deltaY, 0);
             }
             else
             {
-                velocidad = new Vector3((velocidadKunai + deltaX) * 1, (velocidadKunai + deltaY) * direccionATirar.y, 0);
+                velocidad = new Vector3((velocidadKunai) * 1 + deltaX, (velocidadKunai) * direccionATirar.y + deltaY, 0);
             }
         }
 
@@ -123,7 +123,6 @@ public class Kunai_Controller : MonoBehaviour
             if (bandera1)//primera vez que entra en la condicion.
             {
                 PlaySound("sonidoKunaiRoto_" + UnityEngine.Random.Range(0, 3).ToString());
-                Debug.Log("deberia repor");
                 bandera1 = false;
 
             }

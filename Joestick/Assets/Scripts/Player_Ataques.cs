@@ -35,7 +35,7 @@ public class Player_Ataques : MonoBehaviour
 
     AnimatorClipInfo[] m_CurrentClipInfo;
 
-     void Awake()
+    void Awake()
     {
         foreach (Sound s in sounds)
         {
@@ -79,6 +79,7 @@ public class Player_Ataques : MonoBehaviour
 
         Manejador_Chidori();
         Manejador_Kuanis();
+        Manejador_Boludeces();
 
     }
 
@@ -211,6 +212,23 @@ public class Player_Ataques : MonoBehaviour
         else
         {
 
+        }
+    }
+
+
+
+
+    public void Manejador_Boludeces()
+    {
+        //new animation se llama la animacion por defecto.. si, mala mía.
+        if (joestick.fabajo && doingChidori == false && doingKunais == false)
+        {
+            if ((nombreAnimacion == "New Animation" || nombreAnimacion == "Player_idle_YBAILO"))
+                animator.SetBool("ybailo", true);
+        }
+        else
+        {
+            animator.SetBool("ybailo", false);
         }
     }
 }

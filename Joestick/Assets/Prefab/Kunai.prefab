@@ -259,8 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadKunai: 80
   aceleracionGravedad: -8
-  maxDeltaX: 40
-  maxDeltaY: 40
+  maxDeltaX: 10
+  maxDeltaY: 10
   sounds:
   - clip: {fileID: 8300000, guid: f61f116f5e804ff4bb5fc1768777d854, type: 3}
     Nombre: 
