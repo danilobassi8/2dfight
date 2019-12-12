@@ -23,13 +23,16 @@ public class Player_Ataques : MonoBehaviour
     public float contadorChidori;
     private string PlayerName;
     private bool instanciaChidori;
-    private bool banderaSonido;
+    private bool banderaSonido, banderaPrimerCastChidori;
+
 
     //variables para los kunais
     private GameObject kunaiSpawner;
     private bool doingKunais = false;
     private float clockKunais;
     public float clockHabilitacionKunai;
+
+    //variables para los ataques normales.
 
     private bool tocandoPiso;
 
@@ -63,12 +66,13 @@ public class Player_Ataques : MonoBehaviour
         kunaiSpawner = this.transform.Find("KunaiSpawner").gameObject;
         rb = this.GetComponent<Rigidbody2D>();
 
-
+        // banderas y constantes iniciales. no tocar.
         contadorChidori = -1;
         clockKunais = -1;
         clockHabilitacionKunai = -1;
         HabilitacionKunai = HabilitacionKunai + tiempoKunais;
         banderaSonido = true;
+        banderaPrimerCastChidori = true;
     }
 
 
@@ -79,6 +83,7 @@ public class Player_Ataques : MonoBehaviour
 
         Manejador_Chidori();
         Manejador_Kuanis();
+        Manejador_AtaquesNormales();
         Manejador_Boludeces();
 
     }
@@ -101,9 +106,10 @@ public class Player_Ataques : MonoBehaviour
 
     public void Manejador_Chidori()
     {
-        if (joestick.b4 && chidorispawned == false && AnimacionActual(animator) != "player1_chidori_middle" && doingKunais == false) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
+        if (joestick.b1 && chidorispawned == false && AnimacionActual(animator) != "player1_chidori_middle" && doingKunais == false && banderaPrimerCastChidori) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
         {
             doingChidori = true;
+            banderaPrimerCastChidori = false;
 
             animator.SetBool("chidori_summon", true);
             animator.Play("Player1_chidori");
@@ -141,6 +147,8 @@ public class Player_Ataques : MonoBehaviour
                 chidorispawned = false;
                 doingChidori = false;
                 banderaSonido = true;
+                banderaPrimerCastChidori = true;
+
                 animator.SetBool("chidori_summon", false);
             }
 
@@ -215,8 +223,14 @@ public class Player_Ataques : MonoBehaviour
         }
     }
 
+    void Manejador_AtaquesNormales()
+    {
+        if (joestick.b4 && doingChidori == false && doingKunais == false)
+        {
+            animator.SetBool("pegandoGeneral", true);
+        }
 
-
+    }
 
     public void Manejador_Boludeces()
     {
@@ -231,4 +245,8 @@ public class Player_Ataques : MonoBehaviour
             animator.SetBool("ybailo", false);
         }
     }
+
+
+
+
 }
