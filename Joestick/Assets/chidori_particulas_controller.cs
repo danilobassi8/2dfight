@@ -12,8 +12,7 @@ public class chidori_particulas_controller : MonoBehaviour
     void Start()
     {
         this.transform.position = master.transform.position;
-    
-
+        GameObject.Destroy(this,10f);
     }
 
     // Update is called once per frame
