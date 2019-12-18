@@ -13,8 +13,10 @@ public class Player_Ataques : MonoBehaviour
     public float tiempoKunais;
     public float HabilitacionKunai;
     public Sound[] sounds;
-    public bool PuedeDañar;
-    
+    public bool PuedeDañar; //ver
+    public float radioAtaquePiñas;
+
+
 
     private _Joestick joestick;
     private Animator animator;
@@ -37,6 +39,7 @@ public class Player_Ataques : MonoBehaviour
     //variables para los ataques normales.
     private bool banderaPrimerPiña;
     private bool doingPiñas;
+    private Transform puntoPiñas;
 
     private bool tocandoPiso;
 
@@ -61,7 +64,7 @@ public class Player_Ataques : MonoBehaviour
 
     void Start()
     {
-        PlayerName = "Player1";
+        PlayerName = this.transform.root.gameObject.name;
 
         animator = GetComponent<Animator>(); ;
         chidorispawned = false;
@@ -69,6 +72,8 @@ public class Player_Ataques : MonoBehaviour
         joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
         kunaiSpawner = this.transform.Find("KunaiSpawner").gameObject;
         rb = this.GetComponent<Rigidbody2D>();
+        puntoPiñas = this.transform.root.gameObject.transform.Find("cuerpo").gameObject.transform.Find("mano DER");
+
 
         // banderas y constantes iniciales. no tocar.
         contadorChidori = -1;
@@ -238,31 +243,23 @@ public class Player_Ataques : MonoBehaviour
 
     void Manejador_AtaquesNormales()
     {
-        if (joestick.b4 && doingChidori == false && doingKunais == false && banderaPrimerPiña && doingPiñas)
+        if (joestick.b4 && doingChidori == false && doingKunais == false && banderaPrimerPiña && doingPiñas == false)
         {
             animator.SetBool("pegandoGeneral", true);
+            animator.SetTrigger("pegandoTrigger");
             banderaPrimerPiña = false;
             doingPiñas = true;
         }
-        if (joestick.b4)
+        if (joestick.b4 && doingPiñas == true)
         {
-            // si esta apretando el boton de pegar.
-            if (nombreAnimacionActual == "Player_ataque1")
-            {
-                
-            }
-            if (nombreAnimacionActual == "Player_ataque2")
-            {
+            Atacar();
 
-            }
-            if (nombreAnimacionActual == "Player_ataque3")
-            {
-
-            }
-            if (nombreAnimacionActual == "Player_ataque4")
-            {
-
-            }
+        }
+        else
+        {
+            doingPiñas = false;
+            banderaPrimerPiña = true;
+            animator.SetBool("pegandoGeneral", false);
         }
 
     }
@@ -281,7 +278,39 @@ public class Player_Ataques : MonoBehaviour
         }
     }
 
+    public void Atacar()
+    {
+        Collider2D[] objetosGolpeados = Physics2D.OverlapCircleAll(puntoPiñas.position, radioAtaquePiñas); //traigo todos los objetos tocados
+        List<GameObject> enemigosGolpeados = new List<GameObject>();
 
+        //los filtro
+        foreach (Collider2D enemigo in objetosGolpeados)
+        {
+            GameObject rooter = enemigo.transform.root.gameObject; //objeto root
+            if (rooter.name != PlayerName)
+            {
+                if (enemigosGolpeados.Contains(rooter) == false) // si la lista no contiene a ese objeto.
+                {
+                    enemigosGolpeados.Add(rooter);
+                }
+
+            }
+        }
+        string s = "";
+        foreach (GameObject objetos in enemigosGolpeados)
+        {
+            s = s + objetos.name + " - ";
+        }
+        Debug.Log("golpeamos a : "+s);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (puntoPiñas == null)
+            return;
+
+        Gizmos.DrawWireSphere(puntoPiñas.position, radioAtaquePiñas);
+    }
 
 
 }
