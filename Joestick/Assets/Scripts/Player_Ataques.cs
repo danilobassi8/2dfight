@@ -8,6 +8,7 @@ public class Player_Ataques : MonoBehaviour
 {
 
     public GameObject prefabChidori;
+    public Color colorChidori;
     public string nombreAnimacionActual;
     public float tiempoChidori;
     public float tiempoKunais;
@@ -146,8 +147,9 @@ public class Player_Ataques : MonoBehaviour
         {
             chidorispawned = true;
             GameObject my_chidori = GameObject.Instantiate(prefabChidori);
-
+            
             my_chidori.GetComponent<Chidori_sequirPlayer>().test = false;
+            my_chidori.GetComponent<Chidori_sequirPlayer>().color = colorChidori;
             my_chidori.name = PlayerName + "_Chidori";
             my_chidori.transform.position = GameObject.Find(PlayerName).GetComponent<Transform>().Find("cuerpo").GetComponent<Transform>().Find("mano IZQ").transform.position;
 

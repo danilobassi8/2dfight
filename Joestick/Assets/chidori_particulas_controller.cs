@@ -7,14 +7,28 @@ public class chidori_particulas_controller : MonoBehaviour
 {
 
     public GameObject master;
+    public bool encandido;
+    public Color color;
 
     private Vector3 posicion;
+    private ParticleSystem ps;
 
     void Start()
     {
 
         this.transform.position = master.transform.position;
-        GameObject.Destroy(this.gameObject, 10f);
+
+        //cambia el startColor"
+        ps = GetComponent<ParticleSystem>();
+        var main = ps.main;
+        color.a = 1f;
+        main.startColor = color;
+
+
+        if (this.gameObject.name != "seguidorMano")
+            GameObject.Destroy(this.gameObject, 10f);
+
+
     }
 
     // Update is called once per frame
@@ -22,10 +36,21 @@ public class chidori_particulas_controller : MonoBehaviour
     {
         if (master != null)
         {
-            posicion = master.transform.position;
-            posicion.z = posicion.z + 5;
-            this.transform.position = posicion;
+            if (this.gameObject.name == "seguidorMano")
+            {
+                posicion = master.transform.position;
+                posicion.z = posicion.z + 5;
+                this.transform.position = posicion;
+            }
+            else // si es el efecto del chidori normal.
+            {
+                posicion = master.transform.position;
+                posicion.z = posicion.z + 5;
+                this.transform.position = posicion;
+            }
+
         }
+
 
 
 

@@ -8,11 +8,13 @@ public class Chidori_sequirPlayer : MonoBehaviour
     public bool test; //variable que use para testearlo.
 
     private string playerName;
+    public Color color;
     Vector3 posicionSeguir;
     public GameObject PrefabParticulas;
     public Sound[] sounds;
 
     private GameObject particulas;
+
 
     void Awake()
     {
@@ -24,6 +26,7 @@ public class Chidori_sequirPlayer : MonoBehaviour
             s.source.volume = s.volumen;
             s.source.pitch = s.pitch;
         }
+
     }
     public void PlaySound(string name)
     {
@@ -34,11 +37,18 @@ public class Chidori_sequirPlayer : MonoBehaviour
 
     void Start()
     {
+        //cambia el color del chidori.
+
+        color.a = 0.85f; //cambio el alfa del color
+        this.transform.Find("rayos").gameObject.GetComponent<SpriteRenderer>().color = color;
+        this.transform.Find("chidori").gameObject.GetComponent<SpriteRenderer>().color = color;
+
         if (!test)
             playerName = this.name.Substring(0, 7); //veo quien es el player con el nombre del chidori.
 
         particulas = Instantiate(PrefabParticulas, this.gameObject.transform.position, Quaternion.identity) as GameObject;
         particulas.GetComponent<chidori_particulas_controller>().master = this.gameObject;
+        particulas.GetComponent<chidori_particulas_controller>().color = this.color;
         PlaySound("chidori");
     }
 
