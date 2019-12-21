@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Kunai_Controller : MonoBehaviour
 {
@@ -46,18 +47,34 @@ public class Kunai_Controller : MonoBehaviour
 
     void Start()
     {
-        float r = UnityEngine.Random.Range(0f, 1f);
-        if (r < 0.5) //se usa solamente si el kunai se rompe
+        if (SceneManager.GetActiveScene().name == "Menu_1") //si es del menu. No se destruye
         {
+            this.transform.localScale = new Vector3(0.7f, 0.7f, 0f);
             randomDirection = 1;
         }
         else
         {
-            randomDirection = -1;
+
+            float r = UnityEngine.Random.Range(0f, 1f);
+            if (r < 0.5) //se usa solamente si el kunai se rompe. Indica para que lado gira.
+            {
+                randomDirection = 1; //sentido Anti-horario
+            }
+            else
+            {
+                randomDirection = -1; //sentido horario
+            }
+
+            Destroy(this.gameObject, 4f);
         }
 
+
         bandera1 = true;
-        direccionATirar = this.Objecto_Fundador.GetComponent<Transform>().Find("KunaiSpawner").GetComponent<Kunai_Spawner_Controller>().direccionATirar;
+
+        if (Objecto_Fundador != null)
+            direccionATirar = this.Objecto_Fundador.GetComponent<Transform>().Find("KunaiSpawner").GetComponent<Kunai_Spawner_Controller>().direccionATirar;
+        else
+            direccionATirar = new Vector3(1, 0, 0);
 
         deltaX = UnityEngine.Random.Range(0, maxDeltaX);
         deltaY = UnityEngine.Random.Range(-maxDeltaY, maxDeltaY);
@@ -68,14 +85,22 @@ public class Kunai_Controller : MonoBehaviour
             velocidad = new Vector3((velocidadKunai) * direccionATirar.x + deltaX, (velocidadKunai) * direccionATirar.y + deltaY, 0);
         else
         {
-            if (Objecto_Fundador.transform.localScale.x < 0) // si mira para la izq
+            if (Objecto_Fundador != null)
             {
-                velocidad = new Vector3((velocidadKunai) * -1 + deltaX, (velocidadKunai) * direccionATirar.y + deltaY, 0);
+                if (Objecto_Fundador.transform.localScale.x < 0) // si mira para la izq
+                {
+                    velocidad = new Vector3((velocidadKunai) * -1 + deltaX, (velocidadKunai) * direccionATirar.y + deltaY, 0);
+                }
+                else
+                {
+                    velocidad = new Vector3((velocidadKunai) * 1 + deltaX, (velocidadKunai) * direccionATirar.y + deltaY, 0);
+                }
             }
             else
             {
-                velocidad = new Vector3((velocidadKunai) * 1 + deltaX, (velocidadKunai) * direccionATirar.y + deltaY, 0);
+                velocidad = new Vector3((velocidadKunai) * 1 + deltaX, (velocidadKunai) * 0 + deltaY, 0);
             }
+
         }
 
 
@@ -85,7 +110,7 @@ public class Kunai_Controller : MonoBehaviour
 
         lanzando = true;
 
-        Destroy(this.gameObject, 4f);
+
     }
 
 
@@ -132,7 +157,7 @@ public class Kunai_Controller : MonoBehaviour
                 this.transform.Rotate(0, 0, UnityEngine.Random.Range(12, 22));                          //la hace rotar.
                 x = randomDirection * UnityEngine.Random.Range(0f, 0.8f) * factorAmortiguamiento;
                 y = y - aceleracionGravedad * Time.deltaTime * factorAmortiguamiento;
-                transform.position = new Vector3(transform.position.x - x, transform.position.y - y, transform.position.z);
+                transform.position = new Vector3(transform.position.x - x, transform.position.y - y, -9);
             }
 
         }
@@ -151,6 +176,23 @@ public class Kunai_Controller : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         string padre = saberPadre(col.gameObject);
+        if (Objecto_Fundador == null)
+        {
+
+            lanzando = false;
+            if (UnityEngine.Random.Range(0f, 1f) > probabilidadDeMantenerseSano)
+            {
+
+                KunaiSeRompe();
+            }
+            else
+            {
+                posicionFinal = this.transform.position;
+            }
+            return;
+        }
+
+
         if (padre == Objecto_Fundador.name)
         {
             //que pasa si choca con el padre.

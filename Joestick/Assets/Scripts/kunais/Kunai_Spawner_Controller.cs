@@ -10,9 +10,11 @@ public class Kunai_Spawner_Controller : MonoBehaviour
     public GameObject KunaiPrefab;
     public bool puedeTirar;
     public Vector3 direccionATirar;
+    public float CantidadKunaisSinPadre;
 
     private float clockInterno;
     private _Joestick Joestick_del_Padre;
+    private float contadorKunais;
 
 
 
@@ -20,13 +22,26 @@ public class Kunai_Spawner_Controller : MonoBehaviour
     void Start()
     {
         clockInterno = TiempoEntreKunai;
-        Joestick_del_Padre = this.transform.parent.GetComponent<Player1_controller>().joestick;
+        if (transform.parent != null)
+        {
+            Joestick_del_Padre = this.transform.parent.GetComponent<Player1_controller>().joestick;
+            contadorKunais = 30;
+
+        }
+        else //si el padre es null.
+        {
+            contadorKunais = CantidadKunaisSinPadre;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.direccionATirar = Joestick_del_Padre.direccionJoestickDerecho;
+        if (transform.parent != null)
+            this.direccionATirar = Joestick_del_Padre.direccionJoestickDerecho;
+        else                                                                        //si no tiene padre, es porque sale derecho.
+            this.direccionATirar = new Vector3(1, 0, 0);
 
         if (puedeTirar)
         {
@@ -35,18 +50,22 @@ public class Kunai_Spawner_Controller : MonoBehaviour
                 clockInterno = 0;
                 InvocaKunai(this.transform.position, direccionATirar);
 
+                if (transform.parent == null)
+                    contadorKunais = contadorKunais - 1;
             }
             clockInterno = clockInterno + Time.deltaTime;
         }
 
-
+        if (contadorKunais <= 0)
+            puedeTirar = false;
     }
 
     public void InvocaKunai(Vector3 posicion, Vector3 dondeTiro)
     {
         GameObject a = Instantiate(KunaiPrefab) as GameObject;
         a.transform.position = posicion;
-        a.GetComponent<Kunai_Controller>().Objecto_Fundador = this.transform.parent.gameObject;
+        if (transform.parent != null)
+            a.GetComponent<Kunai_Controller>().Objecto_Fundador = this.transform.parent.gameObject;
         a.GetComponent<Kunai_Controller>().direccionATirar = dondeTiro;
 
     }
