@@ -18,15 +18,15 @@ public class BORRAR_test : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("ENTRO:" + col.gameObject.transform.root.name);
+        // Debug.Log("ENTRO:" + col.gameObject.transform.root.name);
     }
     void OnTriggerExit2D(Collider2D col)
     {
-        Debug.Log("SALIO" + col.gameObject.transform.root.name);
+        // Debug.Log("SALIO" + col.gameObject.transform.root.name);
 
     }
     void OnTriggerStay2D(Collider2D col)
     {
-		
+
     }
 }

@@ -44,8 +44,15 @@ public class Player_Ataques : MonoBehaviour
 
     //variables para la transformacion.
     public int TransformacionesPosibles;
-
-
+    private bool mirandoDerecha;
+    private Vector3 vectorCero;
+    public GameObject prefabTronco;
+    public float tiempoEntreTroncos;
+    private float clockTronco;
+    public GameObject prefabHumo;
+    private GameObject CheckTeleport;
+    private GameObject p2, p3;
+    private GameObject coordenadas;
 
     private bool tocandoPiso;
 
@@ -79,17 +86,19 @@ public class Player_Ataques : MonoBehaviour
         kunaiSpawner = this.transform.Find("KunaiSpawner").gameObject;
         rb = this.GetComponent<Rigidbody2D>();
         puntoPiñas = this.transform.root.gameObject.transform.Find("cuerpo").gameObject.transform.Find("mano DER");
-
+        CheckTeleport = this.gameObject.transform.Find("ChekeadorPiso/CheckTeleport").gameObject;
 
         // banderas y constantes iniciales. no tocar.
         contadorChidori = -1;
         clockKunais = -1;
         clockHabilitacionKunai = -1;
+        clockTronco = -1;
         HabilitacionKunai = HabilitacionKunai + tiempoKunais;
         banderaSonido = true;
         banderaPrimerCastChidori = true;
         banderaPrimerPiña = true;
         PuedeDañar = false;
+        vectorCero = new Vector3(0, 0, 0);
 
 
 
@@ -105,6 +114,7 @@ public class Player_Ataques : MonoBehaviour
 
         nombreAnimacionActual = AnimacionActual(animator);
 
+        Manejador_Transformacion();
         Manejador_Chidori();
         Manejador_Kuanis();
         Manejador_AtaquesNormales();
@@ -152,7 +162,7 @@ public class Player_Ataques : MonoBehaviour
         {
             chidorispawned = true;
             GameObject my_chidori = GameObject.Instantiate(prefabChidori);
-            
+
             my_chidori.GetComponent<Chidori_sequirPlayer>().test = false;
             my_chidori.GetComponent<Chidori_sequirPlayer>().color = colorChidori;
             my_chidori.name = PlayerName + "_Chidori";
@@ -308,8 +318,175 @@ public class Player_Ataques : MonoBehaviour
         {
             s = s + objetos.name + " - ";
         }
-        Debug.Log("golpeamos a : "+s);
+        Debug.Log("golpeamos a : " + s);
     }
+
+    public void Manejador_Transformacion()
+    {
+        // sirve para saber si mira o no a la derecha.
+        if (joestick.direccionJoestickIzquierdo.x < 0)
+        {
+            mirandoDerecha = false;
+
+        }
+        else if (joestick.direccionJoestickIzquierdo.x > 0)
+        {
+            mirandoDerecha = true;
+
+        } // hasta aca.
+
+
+        if (joestick.RT && (joestick.direccionJoestickDerecho.x != 0f || joestick.direccionJoestickDerecho.y != 0f) && doingKunais == false && TransformacionesPosibles > 0 && clockTronco < 0)
+        {
+            Vector3 posicionPreTransformacion = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+            float x = joestick.direccionJoestickDerecho.x;
+            float y = joestick.direccionJoestickDerecho.y;
+
+
+            TeleTransporta(x, y);
+
+
+
+            //invoca al tronco en el lugar previo a la invocacion.
+            GameObject a = Instantiate(prefabTronco) as GameObject;
+            a.transform.position = posicionPreTransformacion;
+            a.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 1, 0);
+            clockTronco = tiempoEntreTroncos;
+        }
+
+        if (clockTronco >= 0)
+            clockTronco -= Time.deltaTime;
+    }
+
+
+    void TeleTransporta(float x, float y)
+    {
+
+
+        Vector3 posicionTransportarFINAL = new Vector3(0, 0, 0);
+
+        if (mirandoDerecha)
+        {
+            if (x > 0 && y == 0)
+            {
+                coordenadas = CheckTeleport.transform.Find("10").gameObject;
+
+                p2 = coordenadas.transform.Find("p2").gameObject;
+                p3 = coordenadas.transform.Find("p3").gameObject;
+
+                if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p3.transform.position;
+                }
+                else if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p2.transform.position;
+                }
+                else
+                {
+                    TeleTransporta(1, 1);
+                    return;
+                }
+
+            }
+            else if (x > 0 && y > 0)
+            {
+                coordenadas = CheckTeleport.transform.Find("11").gameObject;
+
+                p2 = coordenadas.transform.Find("p2").gameObject;
+                p3 = coordenadas.transform.Find("p3").gameObject;
+
+                if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p3.transform.position;
+                }
+                else if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p2.transform.position;
+                }
+                else
+                {
+                    TeleTransporta(0, 1);
+                    return;
+                }
+            }
+            else if (x == 0 && y > 0)
+            {
+                coordenadas = CheckTeleport.transform.Find("01").gameObject;
+
+                p2 = coordenadas.transform.Find("p2").gameObject;
+                p3 = coordenadas.transform.Find("p3").gameObject;
+
+                if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p3.transform.position;
+                }
+                else if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p2.transform.position;
+                }
+                else
+                {
+                    // no se transporta a ningun lado.
+                    return;
+                }
+            }
+            else if (x < 0 && y < 0)
+            {
+                coordenadas = CheckTeleport.transform.Find("-11").gameObject;
+
+                p2 = coordenadas.transform.Find("p2").gameObject;
+                p3 = coordenadas.transform.Find("p3").gameObject;
+
+                if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p3.transform.position;
+                }
+                else if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p2.transform.position;
+                }
+                else
+                {
+                    TeleTransporta(0, 1);
+                    return;
+                }
+            }
+            else if (x < 1 && y == 0)
+            {
+                coordenadas = CheckTeleport.transform.Find("10").gameObject;
+
+                p2 = coordenadas.transform.Find("p2").gameObject;
+                p3 = coordenadas.transform.Find("p3").gameObject;
+
+                if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p3.transform.position;
+                }
+                else if (p3.GetComponent<puntoTP_controller>().dentroMapa)
+                {
+                    posicionTransportarFINAL = p2.transform.position;
+                }
+                else
+                {
+                    TeleTransporta(-1, 1);
+                    return;
+                }
+            }
+
+            //instancia al jugador en la posicion, e invoca humo.
+            GameObject a = Instantiate(prefabHumo) as GameObject;
+            a.name = PlayerName + "HumoTransportacion";
+            a.GetComponent<humoExplosion_script>().objetoASeguir = this.gameObject;
+            this.transform.position = posicionTransportarFINAL;
+
+        }
+        else // si miraba a la izquierda.
+        {
+
+        }
+    }
+
 
     void OnDrawGizmosSelected()
     {
