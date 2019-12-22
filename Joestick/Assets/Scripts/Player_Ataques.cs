@@ -42,6 +42,11 @@ public class Player_Ataques : MonoBehaviour
     private bool doingPiñas;
     private Transform puntoPiñas;
 
+    //variables para la transformacion.
+    public int TransformacionesPosibles;
+
+
+
     private bool tocandoPiso;
 
     AnimatorClipInfo[] m_CurrentClipInfo;

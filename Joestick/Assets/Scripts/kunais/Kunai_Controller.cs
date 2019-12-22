@@ -49,7 +49,8 @@ public class Kunai_Controller : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Menu_1") //si es del menu. No se destruye
         {
-            this.transform.localScale = new Vector3(0.7f, 0.7f, 0f);
+            float nroA = UnityEngine.Random.Range(0.75f, 1.2f);
+            this.transform.localScale = new Vector3(nroA, nroA, 0f);
             randomDirection = 1;
         }
         else
@@ -175,6 +176,9 @@ public class Kunai_Controller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.name == "LimitesDelMapa") // si es con los limites del mapa, no pasa nada.
+        { return; }
+
         string padre = saberPadre(col.gameObject);
         if (Objecto_Fundador == null)
         {
