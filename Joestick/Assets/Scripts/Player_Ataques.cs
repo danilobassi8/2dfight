@@ -53,6 +53,7 @@ public class Player_Ataques : MonoBehaviour
     private GameObject CheckTeleport;
     private GameObject p2, p3;
     private GameObject coordenadas;
+    private bool excepcionR;
 
     private bool tocandoPiso;
 
@@ -99,6 +100,7 @@ public class Player_Ataques : MonoBehaviour
         banderaPrimerPiña = true;
         PuedeDañar = false;
         vectorCero = new Vector3(0, 0, 0);
+        excepcionR = false;
 
 
 
@@ -341,7 +343,8 @@ public class Player_Ataques : MonoBehaviour
             Vector3 posicionPreTransformacion = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
             float x = joestick.direccionJoestickDerecho.x;
             float y = joestick.direccionJoestickDerecho.y;
-
+            if (y < 0)
+                y = -y;
 
             TeleTransporta(x, y);
 
@@ -365,7 +368,7 @@ public class Player_Ataques : MonoBehaviour
 
         Vector3 posicionTransportarFINAL = new Vector3(0, 0, 0);
 
-        if (mirandoDerecha)
+        if (mirandoDerecha || excepcionR)
         {
             if (x > 0 && y == 0)
             {
@@ -431,7 +434,7 @@ public class Player_Ataques : MonoBehaviour
                     return;
                 }
             }
-            else if (x < 0 && y < 0)
+            else if (x < 0 && y > 0)
             {
                 coordenadas = CheckTeleport.transform.Find("-11").gameObject;
 
@@ -452,9 +455,9 @@ public class Player_Ataques : MonoBehaviour
                     return;
                 }
             }
-            else if (x < 1 && y == 0)
+            else if (x < 0 && y == 0)
             {
-                coordenadas = CheckTeleport.transform.Find("10").gameObject;
+                coordenadas = CheckTeleport.transform.Find("-10").gameObject;
 
                 p2 = coordenadas.transform.Find("p2").gameObject;
                 p3 = coordenadas.transform.Find("p3").gameObject;
@@ -473,6 +476,10 @@ public class Player_Ataques : MonoBehaviour
                     return;
                 }
             }
+            else if (posicionTransportarFINAL == new Vector3(0, 0, 0))
+            {
+                return;
+            }
 
             //instancia al jugador en la posicion, e invoca humo.
             GameObject a = Instantiate(prefabHumo) as GameObject;
@@ -483,7 +490,10 @@ public class Player_Ataques : MonoBehaviour
         }
         else // si miraba a la izquierda.
         {
-
+            excepcionR = true;
+            TeleTransporta(-x, y);
+            excepcionR = false;
+            return;
         }
     }
 

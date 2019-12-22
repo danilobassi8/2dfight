@@ -10,7 +10,7 @@ public class humoExplosion_script : MonoBehaviour
     void Start()
     {
         GameObject.Destroy(this.gameObject, 2.1f);
-
+		
     }
 
     // Update is called once per frame
