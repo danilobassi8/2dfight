@@ -45,7 +45,6 @@ public class Player_Ataques : MonoBehaviour
     //variables para la transformacion.
     public int TransformacionesPosibles;
     private bool mirandoDerecha;
-    private Vector3 vectorCero;
     public GameObject prefabTronco;
     public float tiempoEntreTroncos;
     private float clockTronco;
@@ -99,7 +98,6 @@ public class Player_Ataques : MonoBehaviour
         banderaPrimerCastChidori = true;
         banderaPrimerPiña = true;
         PuedeDañar = false;
-        vectorCero = new Vector3(0, 0, 0);
         excepcionR = false;
 
 
@@ -497,14 +495,6 @@ public class Player_Ataques : MonoBehaviour
         }
     }
 
-
-    void OnDrawGizmosSelected()
-    {
-        if (puntoPiñas == null)
-            return;
-
-        Gizmos.DrawWireSphere(puntoPiñas.position, radioAtaquePiñas);
-    }
-
+//Aca estaba el onDrawGrizmos. lo borre, hay que reacerlo.
 
 }

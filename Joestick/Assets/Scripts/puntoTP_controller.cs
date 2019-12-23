@@ -26,11 +26,7 @@ public class puntoTP_controller : MonoBehaviour
             Gizmos.color = Color.red;
         }
     }
-    void OnDrawGizmos() // despues borrar
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(this.gameObject.transform.position, radio);
-    }
+ 
 
 
 

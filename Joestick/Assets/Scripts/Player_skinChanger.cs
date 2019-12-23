@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class test_fight_script : MonoBehaviour
+public class Player_skinChanger : MonoBehaviour
 {
+    public Sprite[] sprites;
 
     // Use this for initialization
     void Start()
