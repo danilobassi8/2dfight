@@ -52,7 +52,9 @@ public class Player_Ataques : MonoBehaviour
     private GameObject CheckTeleport;
     private GameObject p2, p3;
     private GameObject coordenadas;
-    private bool excepcionR;
+    private bool excepcionR, banderaPrimerTP;
+
+
 
     private bool tocandoPiso;
 
@@ -99,6 +101,7 @@ public class Player_Ataques : MonoBehaviour
         banderaPrimerPiña = true;
         PuedeDañar = false;
         excepcionR = false;
+        banderaPrimerTP = true;
 
 
 
@@ -336,8 +339,9 @@ public class Player_Ataques : MonoBehaviour
         } // hasta aca.
 
 
-        if (joestick.RT && (joestick.direccionJoestickDerecho.x != 0f || joestick.direccionJoestickDerecho.y != 0f) && doingKunais == false && TransformacionesPosibles > 0 && clockTronco < 0)
+        if (joestick.RT && (joestick.direccionJoestickDerecho.x != 0f || joestick.direccionJoestickDerecho.y != 0f) && doingKunais == false && TransformacionesPosibles > 0 && clockTronco < 0 && banderaPrimerTP)
         {
+            banderaPrimerTP = false;
             Vector3 posicionPreTransformacion = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
             float x = joestick.direccionJoestickDerecho.x;
             float y = joestick.direccionJoestickDerecho.y;
@@ -353,6 +357,7 @@ public class Player_Ataques : MonoBehaviour
             a.transform.position = posicionPreTransformacion;
             a.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 1, 0);
             clockTronco = tiempoEntreTroncos;
+            banderaPrimerTP = true;
         }
 
         if (clockTronco >= 0)
@@ -495,6 +500,6 @@ public class Player_Ataques : MonoBehaviour
         }
     }
 
-//Aca estaba el onDrawGrizmos. lo borre, hay que reacerlo.
+    //Aca estaba el onDrawGrizmos. lo borre, hay que reacerlo.
 
 }
