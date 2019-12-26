@@ -179,6 +179,12 @@ public class Kunai_Controller : MonoBehaviour
         if (col.name == "LimitesDelMapa") // si es con los limites del mapa, no pasa nada.
         { return; }
 
+        if (col.name == "Escudo")
+        {
+            KunaiSeRompe();
+            return;
+        }
+
         string padre = saberPadre(col.gameObject);
         if (Objecto_Fundador == null)
         {

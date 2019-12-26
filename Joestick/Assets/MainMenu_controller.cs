@@ -28,13 +28,8 @@ public class MainMenu_controller : MonoBehaviour
     public void Controles()
     {
         camara_anim.SetTrigger("tocontrol");
-        Invoke("ActivaControles", 2);
     }
 
-    public void ActivaControles()
-    {
-        this.transform.Find("CONTROLES").gameObject.SetActive(true);
-    }
     public void ControlesToMenu()
     {
         camara_anim.SetTrigger("controlTOmain");
