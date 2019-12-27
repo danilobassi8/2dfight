@@ -15,6 +15,7 @@ public class Kunai_Spawner_Controller : MonoBehaviour
     private float clockInterno;
     private _Joestick Joestick_del_Padre;
     private float contadorKunais;
+    private Color color;
 
 
 
@@ -26,13 +27,16 @@ public class Kunai_Spawner_Controller : MonoBehaviour
         {
             Joestick_del_Padre = this.transform.parent.GetComponent<Player1_controller>().joestick;
             contadorKunais = 30;
+            color = this.transform.parent.GetComponent<Player_Ataques>().colorChidori;
 
         }
         else //si el padre es null.
         {
             contadorKunais = CantidadKunaisSinPadre;
+            color = Color.white;
         }
 
+        color.a = 1f;
     }
 
     // Update is called once per frame
@@ -64,6 +68,7 @@ public class Kunai_Spawner_Controller : MonoBehaviour
     {
         GameObject a = Instantiate(KunaiPrefab) as GameObject;
         a.transform.position = posicion;
+        a.GetComponent<SpriteRenderer>().color = color;
         if (transform.parent != null)
             a.GetComponent<Kunai_Controller>().Objecto_Fundador = this.transform.parent.gameObject;
         a.GetComponent<Kunai_Controller>().direccionATirar = dondeTiro;

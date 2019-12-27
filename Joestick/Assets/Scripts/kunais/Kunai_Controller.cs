@@ -176,62 +176,70 @@ public class Kunai_Controller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.name == "LimitesDelMapa") // si es con los limites del mapa, no pasa nada.
-        { return; }
-
-        if (col.name == "Escudo")
+        if (kunaiRoto == false)
         {
-            KunaiSeRompe();
-            return;
-        }
+            string padre = saberPadre(col.gameObject);
 
-        string padre = saberPadre(col.gameObject);
-        if (Objecto_Fundador == null)
-        {
 
-            lanzando = false;
-            if (UnityEngine.Random.Range(0f, 1f) > probabilidadDeMantenerseSano)
+            if (col.name == "LimitesDelMapa") // si es con los limites del mapa, no pasa nada.
             {
+                return;
+            }
 
+            if (col.transform.root.gameObject.name == "escudo")
+            {
+                Debug.Log("FFF");
                 KunaiSeRompe();
+
             }
-            else
-            {
-                posicionFinal = this.transform.position;
-            }
-            return;
-        }
 
 
-        if (padre == Objecto_Fundador.name)
-        {
-            //que pasa si choca con el padre.
-        }
-        else
-        {
-            if (col.gameObject.tag != "Player")
+            if (Objecto_Fundador == null)
             {
+
                 lanzando = false;
-
                 if (UnityEngine.Random.Range(0f, 1f) > probabilidadDeMantenerseSano)
                 {
+
                     KunaiSeRompe();
                 }
                 else
                 {
                     posicionFinal = this.transform.position;
                 }
+                return;
+            }
+
+
+            if (padre == Objecto_Fundador.name)
+            {
+                //que pasa si choca con el padre.
             }
             else
             {
+                if (col.gameObject.tag != "Player")
+                {
+                    lanzando = false;
 
-                // aca se va a rellenar lo que pasa cuando choque con algun personaje que no sea el padre.
+                    if (UnityEngine.Random.Range(0f, 1f) > probabilidadDeMantenerseSano)
+                    {
+                        KunaiSeRompe();
+                    }
+                    else
+                    {
+                        posicionFinal = this.transform.position;
+                    }
+                }
+                else
+                {
+
+                    // aca se va a rellenar lo que pasa cuando choque con algun personaje que no sea el padre.
 
 
+                }
             }
+
         }
-
-
     }
 
     public string saberPadre(GameObject objeto)

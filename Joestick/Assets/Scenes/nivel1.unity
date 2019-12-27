@@ -171,6 +171,31 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!1 &50022462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1354538596798310, guid: 148b53fb2dfe20f429a318b8ad442487,
+    type: 2}
+  m_PrefabInternal: {fileID: 1118554036}
+--- !u!50 &50022467
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 50022462}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &78638596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,7 +1357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabChidori: {fileID: 1342219623371740, guid: 9689cc3f478f6234ca7e62595144d930,
     type: 2}
-  colorChidori: {r: 1, g: 0, b: 0.8302622, a: 0}
+  colorChidori: {r: 1, g: 0, b: 0.8595643, a: 0}
   nombreAnimacionActual: 
   tiempoChidori: 6
   tiempoKunais: 1.3
@@ -1423,6 +1448,10 @@ MonoBehaviour:
     cuerpo: {fileID: 21300000, guid: 5121533317fca044491b67ae97fc0898, type: 3}
     manoIZQ: {fileID: 21300000, guid: 20d5d98db5df95844b9071177e623b97, type: 3}
     manoDER: {fileID: 21300000, guid: b0e1afa5c7f0f0c49815c5321e217d38, type: 3}
+  - cara: {fileID: 21300000, guid: 12af3000ddffd084ca265229e538f860, type: 3}
+    cuerpo: {fileID: 21300000, guid: f9dbad31ec98c804d80eb98784cb20d9, type: 3}
+    manoIZQ: {fileID: 21300000, guid: 92fa94e0f1637db45ada01b566cb8cce, type: 3}
+    manoDER: {fileID: 21300000, guid: 5019c4628e105d84898318bf511b3a21, type: 3}
 --- !u!1 &968551203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,7 +1544,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4854826520417448, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -20
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4854826520417448, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1556,6 +1585,10 @@ Prefab:
         type: 2}
       propertyPath: velocidadGiro
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354538596798310, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
+      propertyPath: m_Name
+      value: escudo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
