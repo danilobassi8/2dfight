@@ -5,6 +5,7 @@ using UnityEngine;
 public class escudo_controller : MonoBehaviour
 {
     public Color colorGeneral;
+    public GameObject invocador;
 
     // Use this for initialization
     void Start()

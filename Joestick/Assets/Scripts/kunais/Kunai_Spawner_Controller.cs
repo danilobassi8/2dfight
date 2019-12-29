@@ -68,6 +68,12 @@ public class Kunai_Spawner_Controller : MonoBehaviour
     {
         GameObject a = Instantiate(KunaiPrefab) as GameObject;
         a.transform.position = posicion;
+        if (transform.parent != null)
+        {
+            color = this.transform.parent.GetComponent<Player_Ataques>().colorChidori;
+            color.a = 1f;
+        }
+
         a.GetComponent<SpriteRenderer>().color = color;
         if (transform.parent != null)
             a.GetComponent<Kunai_Controller>().Objecto_Fundador = this.transform.parent.gameObject;

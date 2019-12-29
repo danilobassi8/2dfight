@@ -54,6 +54,15 @@ public class Player_Ataques : MonoBehaviour
     private GameObject coordenadas;
     private bool excepcionR, banderaPrimerTP;
 
+    //variables para el escudo.
+    public bool doingEscudo;
+    public GameObject prefabEscudo;
+    public bool quietito;
+    private Vector3 posicionquieto;
+    public float tiempoEntreEscudo, duracionEscudo;
+    private float clockescudo, clockEntreEscudos;
+    private bool primeravezescudo, primeravezquieto;
+
 
 
     private bool tocandoPiso;
@@ -95,13 +104,17 @@ public class Player_Ataques : MonoBehaviour
         clockKunais = -1;
         clockHabilitacionKunai = -1;
         clockTronco = -1;
+        clockescudo = -1;
         HabilitacionKunai = HabilitacionKunai + tiempoKunais;
         banderaSonido = true;
         banderaPrimerCastChidori = true;
         banderaPrimerPiña = true;
+        primeravezescudo = true;
         PuedeDañar = false;
         excepcionR = false;
         banderaPrimerTP = true;
+        primeravezquieto = true;
+        clockEntreEscudos = tiempoEntreEscudo;
 
 
 
@@ -109,6 +122,7 @@ public class Player_Ataques : MonoBehaviour
         doingPiñas = false;
         doingChidori = false;
         doingKunais = false;
+        doingEscudo = false;
     }
 
 
@@ -118,6 +132,7 @@ public class Player_Ataques : MonoBehaviour
         nombreAnimacionActual = AnimacionActual(animator);
 
         Manejador_Transformacion();
+        Manejador_Escudo();
         Manejador_Chidori();
         Manejador_Kuanis();
         Manejador_AtaquesNormales();
@@ -143,7 +158,7 @@ public class Player_Ataques : MonoBehaviour
 
     public void Manejador_Chidori()
     {
-        if (joestick.b1 && chidorispawned == false && nombreAnimacionActual != "player1_chidori_middle" && doingKunais == false && banderaPrimerCastChidori && doingPiñas == false) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
+        if (joestick.b1 && chidorispawned == false && nombreAnimacionActual != "player1_chidori_middle" && doingKunais == false && banderaPrimerCastChidori && doingPiñas == false && doingEscudo == false) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
         {
             doingChidori = true;
             banderaPrimerCastChidori = false;
@@ -200,7 +215,7 @@ public class Player_Ataques : MonoBehaviour
     {
         tocandoPiso = this.transform.Find("ChekeadorPiso").gameObject.GetComponent<chekeadorPiso>().tocandoPiso;
 
-        if (joestick.LT && doingChidori == false && doingPiñas == false && clockKunais < 0 && clockHabilitacionKunai < 0)
+        if (joestick.LT && doingChidori == false && doingPiñas == false && clockKunais < 0 && clockHabilitacionKunai < 0 && doingEscudo == false)
         {
             doingKunais = true;
             clockHabilitacionKunai = HabilitacionKunai;
@@ -263,7 +278,7 @@ public class Player_Ataques : MonoBehaviour
 
     void Manejador_AtaquesNormales()
     {
-        if (joestick.b4 && doingChidori == false && doingKunais == false && banderaPrimerPiña && doingPiñas == false)
+        if (joestick.b4 && doingChidori == false && doingKunais == false && banderaPrimerPiña && doingPiñas == false && doingEscudo == false)
         {
             animator.SetBool("pegandoGeneral", true);
             animator.SetTrigger("pegandoTrigger");
@@ -287,7 +302,7 @@ public class Player_Ataques : MonoBehaviour
     public void Manejador_Boludeces()
     {
         //new animation se llama la animacion por defecto.. si, mala mía.
-        if (joestick.fabajo && doingChidori == false && doingKunais == false)
+        if (joestick.fabajo && doingChidori == false && doingKunais == false && doingEscudo == false)
         {
             if ((nombreAnimacionActual == "New Animation" || nombreAnimacionActual == "Player_idle_YBAILO"))
                 animator.SetBool("ybailo", true);
@@ -339,7 +354,7 @@ public class Player_Ataques : MonoBehaviour
         } // hasta aca.
 
 
-        if (joestick.RT && (joestick.direccionJoestickDerecho.x != 0f || joestick.direccionJoestickDerecho.y != 0f) && doingKunais == false && TransformacionesPosibles > 0 && clockTronco < 0 && banderaPrimerTP)
+        if (joestick.RT && (joestick.direccionJoestickDerecho.x != 0f || joestick.direccionJoestickDerecho.y != 0f) && doingKunais == false && TransformacionesPosibles > 0 && clockTronco < 0 && banderaPrimerTP && doingEscudo == false)
         {
             banderaPrimerTP = false;
             Vector3 posicionPreTransformacion = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
@@ -364,6 +379,57 @@ public class Player_Ataques : MonoBehaviour
             clockTronco -= Time.deltaTime;
     }
 
+    void Manejador_Escudo()
+    {
+        if (joestick.b2 && doingKunais == false && doingPiñas == false && doingEscudo == false && doingChidori == false && clockescudo < 0 && clockEntreEscudos >= tiempoEntreEscudo)
+        {
+            doingEscudo = true;
+            clockescudo = duracionEscudo;
+            animator.SetBool("escudando", true);
+        }
+        if (doingEscudo == true && nombreAnimacionActual == "player_escudo_on")
+        {
+            clockescudo -= Time.deltaTime;
+
+            if (primeravezescudo)
+            {
+                primeravezescudo = false;
+
+                GameObject my_escudo = GameObject.Instantiate(prefabEscudo);
+                quietito = true;
+                primeravezquieto = true;
+                posicionquieto = this.gameObject.transform.position;
+                clockEntreEscudos = 0;
+
+                //instancia el escudo.
+                my_escudo.GetComponent<escudo_controller>().invocador = this.gameObject;
+                my_escudo.transform.position = new Vector3(this.gameObject.transform.position.x, this.transform.position.y, this.transform.position.z - 3);
+                my_escudo.GetComponent<escudo_controller>().colorGeneral = colorChidori;
+                my_escudo.name = "escudo";
+                Destroy(my_escudo, duracionEscudo);
+            }
+        }
+        if (clockescudo < 0 && nombreAnimacionActual == "player_escudo_on")
+        {
+            doingEscudo = false;
+            primeravezescudo = true;
+            animator.SetBool("escudando", false);
+            quietito = false;
+            if (primeravezquieto)
+            {
+                this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                primeravezquieto = false;
+            }
+        }
+        if (quietito)
+        {
+            this.gameObject.transform.position = posicionquieto;
+        }
+        if (doingEscudo == false && clockEntreEscudos < tiempoEntreEscudo)
+        {
+            clockEntreEscudos += Time.deltaTime;
+        }
+    }
 
     void TeleTransporta(float x, float y)
     {
@@ -500,6 +566,6 @@ public class Player_Ataques : MonoBehaviour
         }
     }
 
-    //Aca estaba el onDrawGrizmos. lo borre, hay que reacerlo.
+    //Aca estaba el onDrawGrizmos de las piñas. lo borre, hay que reacerlo.
 
 }
