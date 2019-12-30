@@ -19,7 +19,7 @@ public class Player1_controller : MonoBehaviour
     public _Joestick joestick;
     private bool piesTocandoPiso;
     private float ContadorDeSalto;
-    private bool mirandoDerecha;
+    public bool mirandoDerecha;
     private bool miradaActual;
 
     void Start()
