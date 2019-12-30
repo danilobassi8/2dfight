@@ -181,7 +181,7 @@ public class Kunai_Controller : MonoBehaviour
             string padre = saberPadre(col.gameObject);
 
 
-            if (col.name == "LimitesDelMapa") // si es con los limites del mapa, no pasa nada.
+            if (col.name == "LimitesDelMapa" || padre == "tronco") // objetos con los que no interactuar.
             {
                 return;
             }

@@ -186,6 +186,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destruir: 0
   prefabHumo: {fileID: 1063466919806360, guid: 37be0e1445bb4a846ba2b85419c5c5ca, type: 2}
+  sounds:
+  - clip: {fileID: 8300000, guid: a04ae4cf9149e3640907dc00951ea509, type: 3}
+    Nombre: 
+    volumen: 1
+    pitch: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 55feb53a860113f4f9c10cf89f5b4287, type: 3}
+    Nombre: 
+    volumen: 1
+    pitch: 1.07
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 4d070b9ac8e577f479f1859f19f16b9a, type: 3}
+    Nombre: 
+    volumen: 1
+    pitch: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 8f3596be30030dc4d90c05027ba51fd0, type: 3}
+    Nombre: 
+    volumen: 1
+    pitch: 1
+    source: {fileID: 0}
 --- !u!212 &212147835745163066
 SpriteRenderer:
   m_ObjectHideFlags: 1
