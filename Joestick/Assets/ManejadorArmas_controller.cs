@@ -28,7 +28,7 @@ public class ManejadorArmas_controller : MonoBehaviour
             {
                 armadoAntes = true;
 
-                ArmaActual.gameObject.transform.localScale = new Vector3(1, 1, 1);
+                ArmaActual.gameObject.transform.localScale = new Vector3(Mathf.Abs(ArmaActual.gameObject.transform.localScale.x), Mathf.Abs(ArmaActual.gameObject.transform.localScale.y), Mathf.Abs(ArmaActual.gameObject.transform.localScale.z));
                 ArmaActual.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
                 ArmaActual.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
                 //le cambio el tipo de rigidbody y le anulo el poligon Collider.
@@ -71,8 +71,17 @@ public class ManejadorArmas_controller : MonoBehaviour
         //tira el arma.
         ArmaActual.transform.SetParent(null);
         ArmaActual.GetComponent<arma_general_script>().lanzada = true;
-        ArmaActual.GetComponent<Rigidbody2D>().velocity = new Vector2(FuerzaDeTiradoDeArma, 0);
-        ArmaActual.GetComponent<Rigidbody2D>().AddTorque(Torque);
+        if (ArmaActual.GetComponent<arma_general_script>().Invocador.GetComponent<Player1_controller>().mirandoDerecha)
+        {
+            ArmaActual.GetComponent<Rigidbody2D>().velocity = new Vector2(FuerzaDeTiradoDeArma, 0);
+            ArmaActual.GetComponent<Rigidbody2D>().AddTorque(Torque);
+        }
+        else
+        {
+            ArmaActual.GetComponent<Rigidbody2D>().velocity = new Vector2(-FuerzaDeTiradoDeArma, 0);
+            ArmaActual.GetComponent<Rigidbody2D>().AddTorque(-Torque);
+        }
+
         ArmaActual.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         Invoke("TiradaLogica", 1f);
     }
@@ -80,6 +89,6 @@ public class ManejadorArmas_controller : MonoBehaviour
     private void TiradaLogica()
     {
         ArmaActual.GetComponent<arma_general_script>().agarrada = false;
-        //Destroy(ArmaActual, 4f);
+
     }
 }

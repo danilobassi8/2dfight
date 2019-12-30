@@ -213,7 +213,7 @@ public class Kunai_Controller : MonoBehaviour
 
             if (padre == Objecto_Fundador.name)
             {
-                //que pasa si choca con el padre.
+                //que pasa si choca con el padre. (nada)
             }
             else
             {
