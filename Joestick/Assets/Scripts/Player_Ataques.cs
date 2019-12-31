@@ -93,7 +93,26 @@ public class Player_Ataques : MonoBehaviour
         animator = GetComponent<Animator>(); ;
         chidorispawned = false;
 
-        joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
+        string nroPlayer = this.gameObject.name[this.gameObject.name.Length - 1].ToString();
+        if (nroPlayer == "1")
+        {
+            joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
+        }
+        else if (nroPlayer == "2")
+        {
+            joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick2;
+        }
+        else if (nroPlayer == "3")
+        {
+            joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick3;
+        }
+        else if (nroPlayer == "4")
+        {
+            joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick4;
+        }
+
+
+
         kunaiSpawner = this.transform.Find("KunaiSpawner").gameObject;
         rb = this.GetComponent<Rigidbody2D>();
         puntoPiñas = this.transform.root.gameObject.transform.Find("cuerpo").gameObject.transform.Find("mano DER");

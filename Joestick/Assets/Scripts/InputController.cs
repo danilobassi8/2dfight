@@ -6,139 +6,162 @@ using System;
 
 public class InputController : MonoBehaviour
 {
-    public _Joestick Joestick1, Joestick2;
+    public _Joestick Joestick1, Joestick2, Joestick3, Joestick4;
     // variables para recuperar en otros scripts.
 
+    private string identificador;
 
 
-
-    // Use this for initialization
     void Start()
     {
-
+        Joestick1.numero = 1;   // se utilizan solamente para el identificador.
+        Joestick2.numero = 2;
+        Joestick3.numero = 3;
+        Joestick4.numero = 4;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Check_Botones();
-        Check_Analogic();
+        Check_Botones(Joestick1);
+        Check_Botones(Joestick2);
+        //activar los joestick 2,3 y 4 cuando esten listos.
+
+
+        Check_Analogic(Joestick1);
+        Check_Analogic(Joestick2);
+        //activar los joestick 2,3 y 4 cuando esten listos.
+
 
     }
 
-    public void Check_Botones()
+    public void Check_Botones(_Joestick Joestick)
     {
-        if (Input.GetButton("2Button"))
+        identificador = "_j" + Joestick.numero.ToString();
+
+        if (Input.GetButton("2Button" + identificador))
         {
-            Joestick1.b2 = true;
+            Joestick.b2 = true;
         }
         else
         {
-            Joestick1.b2 = false;
+            Joestick.b2 = false;
         }
-        if (Input.GetButton("1Button")) //no me anda el boton del joestick, pero funciona xd.
+        if (Input.GetButton("1Button" + identificador))
         {
-            Joestick1.b1 = true;
-        }
-        else
-        {
-            Joestick1.b1 = false;
-        }
-        if (Input.GetButton("3Button"))
-        {
-            Joestick1.b3 = true;
+            Joestick.b1 = true;
         }
         else
         {
-            Joestick1.b3 = false;
+            Joestick.b1 = false;
         }
-        if (Input.GetButton("4Button"))
+        if (Input.GetButton("3Button" + identificador))
         {
-            Joestick1.b4 = true;
-        }
-        else
-        {
-            Joestick1.b4 = false;
-        }
-        if (Input.GetButton("triggerLT"))
-        {
-            Joestick1.LT = true;
+            Joestick.b3 = true;
         }
         else
         {
-            Joestick1.LT = false;
+            Joestick.b3 = false;
         }
-        if (Input.GetButton("triggerLB"))
+        if (Input.GetButton("4Button" + identificador))
         {
-            Joestick1.LB = true;
-        }
-        else
-        {
-            Joestick1.LB = false;
-        }
-        if (Input.GetButton("triggerRT"))
-        {
-            Joestick1.RT = true;
+            Joestick.b4 = true;
         }
         else
         {
-            Joestick1.RT = false;
+            Joestick.b4 = false;
         }
-        if (Input.GetButton("triggerRB"))
+        if (Input.GetButton("triggerLT" + identificador))
         {
-            Joestick1.RB = true;
+            Joestick.LT = true;
         }
         else
         {
-            Joestick1.RB = false;
+            Joestick.LT = false;
+        }
+        if (Input.GetButton("triggerLB" + identificador))
+        {
+            Joestick.LB = true;
+        }
+        else
+        {
+            Joestick.LB = false;
+        }
+        if (Input.GetButton("triggerRT" + identificador))
+        {
+            Joestick.RT = true;
+        }
+        else
+        {
+            Joestick.RT = false;
+        }
+        if (Input.GetButton("triggerRB" + identificador))
+        {
+            Joestick.RB = true;
+        }
+        else
+        {
+            Joestick.RB = false;
         }
         //Flechas
-        if (Input.GetAxisRaw("flechasHorizontal") == -1)
+        if (Input.GetAxisRaw("flechasHorizontal" + identificador) == -1)
         {
-            Joestick1.fizquierda = true;
+            Joestick.fizquierda = true;
         }
         else
         {
-            Joestick1.fizquierda = false;
+            Joestick.fizquierda = false;
         }
-        if (Input.GetAxisRaw("flechasHorizontal") == 1)
+        if (Input.GetAxisRaw("flechasHorizontal" + identificador) == 1)
         {
-            Joestick1.fderecha = true;
+            Joestick.fderecha = true;
         }
         else
         {
-            Joestick1.fderecha = false;
+            Joestick.fderecha = false;
         }
-        if (Input.GetAxisRaw("flechasVertical") == -1)
+        if (Input.GetAxisRaw("flechasVertical" + identificador) == -1)
         {
-            Joestick1.fabajo = true;
+            Joestick.fabajo = true;
         }
         else
         {
-            Joestick1.fabajo = false;
+            Joestick.fabajo = false;
         }
-        if (Input.GetAxisRaw("flechasVertical") == 1)
+        if (Input.GetAxisRaw("flechasVertical" + identificador) == 1)
         {
-            Joestick1.farriba = true;
+            Joestick.farriba = true;
         }
         else
         {
-            Joestick1.farriba = false;
+            Joestick.farriba = false;
         }
-       
+        if (Input.GetAxisRaw("Start" + identificador) == 1)
+        {
+            Debug.Log("Start");
+            Joestick.Start = true;
+        }
+        else
+        {
+            Joestick.Start = false;
+        }
+
+
     }
 
-    public void Check_Analogic()
+    public void Check_Analogic(_Joestick Joestick)
     {
+
+        identificador = "_j" + Joestick.numero.ToString();
+
         //Obtengo direccion de la rueda izquierda.
-        Joestick1.direccionJoestickIzquierdo = Vector3.zero;
-        Joestick1.direccionJoestickIzquierdo.x = (float)Math.Round(Input.GetAxisRaw("Analog_izq_horizontal"), 2);
-        Joestick1.direccionJoestickIzquierdo.y = (float)Math.Round(-Input.GetAxisRaw("Analog_izq_vertical"), 2);
+        Joestick.direccionJoestickIzquierdo = Vector3.zero;
+        Joestick.direccionJoestickIzquierdo.x = (float)Math.Round(Input.GetAxisRaw("Analog_izq_horizontal" + identificador), 2);
+        Joestick.direccionJoestickIzquierdo.y = (float)Math.Round(-Input.GetAxisRaw("Analog_izq_vertical" + identificador), 2);
 
         //Obtengo direccion de la rueda derecha.
-        Joestick1.direccionJoestickDerecho = Vector3.zero;
-        Joestick1.direccionJoestickDerecho.x = (float)Math.Round(Input.GetAxisRaw("Analog_der_horizontal"), 2);
-        Joestick1.direccionJoestickDerecho.y = (float)Math.Round(-Input.GetAxisRaw("Analog_der_vertical"), 2);
+        Joestick.direccionJoestickDerecho = Vector3.zero;
+        Joestick.direccionJoestickDerecho.x = (float)Math.Round(Input.GetAxisRaw("Analog_der_horizontal" + identificador), 2);
+        Joestick.direccionJoestickDerecho.y = (float)Math.Round(-Input.GetAxisRaw("Analog_der_vertical" + identificador), 2);
 
     }
 
@@ -148,6 +171,7 @@ public class InputController : MonoBehaviour
 [System.Serializable]
 public class _Joestick
 {
+    public int numero;
     public bool b1, b2, b3, b4, farriba, fabajo, fizquierda, fderecha, LT, LB, RB, RT, Start;
     public Vector3 direccionJoestickIzquierdo, direccionJoestickDerecho;
 }

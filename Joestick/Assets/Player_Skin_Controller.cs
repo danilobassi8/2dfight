@@ -64,5 +64,6 @@ public class Player_Skin_Controller : MonoBehaviour
 [System.Serializable]
 public class Skins
 {
+    public string Nombre;
     public Sprite cara, cuerpo, manoIZQ, manoDER;
 }

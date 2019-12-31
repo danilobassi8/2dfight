@@ -16,7 +16,7 @@ public class Player1_controller : MonoBehaviour
     public float saltoHorizontal;
 
 
-    public _Joestick joestick;
+    public _Joestick joestick; //dejarlo publico. Otros scripts utilizan esta variable.
     private bool piesTocandoPiso;
     private float ContadorDeSalto;
     public bool mirandoDerecha;
@@ -25,8 +25,25 @@ public class Player1_controller : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
-        
+
+        string nroPlayer = this.gameObject.name[this.gameObject.name.Length - 1].ToString();
+        if (nroPlayer == "1")
+        {
+            joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick1;
+        }
+        else if (nroPlayer == "2")
+        {
+            joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick2;
+        }
+        else if (nroPlayer == "3")
+        {
+            joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick3;
+        }
+        else if (nroPlayer == "4")
+        {
+            joestick = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick4;
+        }
+
 
     }
 
@@ -68,19 +85,19 @@ public class Player1_controller : MonoBehaviour
 
         // hace que se mueva para los costados
         float x = joestick.direccionJoestickIzquierdo.x;
-        
+
         if (x < 0)
         {
             mirandoDerecha = false;
             Flip("izq");
         }
-        else if(x>0)
+        else if (x > 0)
         {
             mirandoDerecha = true;
             Flip("der");
         }
 
-        
+
 
         //codigo para el salto.
         if (joestick.direccionJoestickIzquierdo.y < 0 && isGrounded == false)
@@ -105,11 +122,11 @@ public class Player1_controller : MonoBehaviour
     {
         if (lado == "der")
         {
-            transform.localScale = new Vector3(1,1,1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            transform.localScale = new Vector3(-1,1,1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }
