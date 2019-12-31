@@ -88,7 +88,8 @@ public class InputController : MonoBehaviour
         {
             Joestick1.RB = true;
         }
-        else{
+        else
+        {
             Joestick1.RB = false;
         }
         //Flechas
@@ -124,6 +125,7 @@ public class InputController : MonoBehaviour
         {
             Joestick1.farriba = false;
         }
+       
     }
 
     public void Check_Analogic()
@@ -146,6 +148,6 @@ public class InputController : MonoBehaviour
 [System.Serializable]
 public class _Joestick
 {
-    public bool b1, b2, b3, b4, farriba, fabajo, fizquierda, fderecha, LT, LB, RB, RT;
+    public bool b1, b2, b3, b4, farriba, fabajo, fizquierda, fderecha, LT, LB, RB, RT, Start;
     public Vector3 direccionJoestickIzquierdo, direccionJoestickDerecho;
 }

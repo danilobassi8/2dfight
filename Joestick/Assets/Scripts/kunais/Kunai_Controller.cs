@@ -188,7 +188,6 @@ public class Kunai_Controller : MonoBehaviour
 
             if (col.transform.root.gameObject.name == "escudo")
             {
-                Debug.Log("FFF");
                 KunaiSeRompe();
 
             }
@@ -219,16 +218,19 @@ public class Kunai_Controller : MonoBehaviour
             {
                 if (col.gameObject.tag != "Player")
                 {
-                    lanzando = false;
+                    if (col.gameObject.tag == "Mapa") //cuando choca el mapa. (parte se rompe, parte se queda fijo)
+                    {
+                        lanzando = false;
+                        if (UnityEngine.Random.Range(0f, 1f) > probabilidadDeMantenerseSano)
+                        {
+                            KunaiSeRompe();
+                        }
+                        else
+                        {
+                            posicionFinal = this.transform.position;
+                        }
+                    }
 
-                    if (UnityEngine.Random.Range(0f, 1f) > probabilidadDeMantenerseSano)
-                    {
-                        KunaiSeRompe();
-                    }
-                    else
-                    {
-                        posicionFinal = this.transform.position;
-                    }
                 }
                 else
                 {
