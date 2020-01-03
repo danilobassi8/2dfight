@@ -9,13 +9,15 @@ public class ManejadorArmas_controller : MonoBehaviour
 
     public float FuerzaDeTiradoDeArma;
     public float Torque;
+    public bool HabilitadoTirar = false;
 
     private bool armadoAntes; //variable para saber cuando es la primera vez que se arma.
     private GameObject ManoASeguir;
+    private bool banderaPrimerTiradaArma;
 
     void Start()
     {
-
+        banderaPrimerTiradaArma = false;
     }
 
     void Update()
@@ -35,13 +37,17 @@ public class ManejadorArmas_controller : MonoBehaviour
 
             }
 
-            if (this.transform.root.gameObject.GetComponent<Player1_controller>().joestick.RB)
+            if (this.transform.root.gameObject.GetComponent<Player1_controller>().joestick.RB && banderaPrimerTiradaArma == false)
             {
-                TirarArma();
-                Debug.Log("tirando");
+                ArmaActual.GetComponent<arma_general_script>().Invocador.GetComponent<Animator>().SetTrigger("TiraArma");
+                banderaPrimerTiradaArma = true;
             }
-
-
+        }
+        if (HabilitadoTirar)
+        {
+            TirarArma();
+            HabilitadoTirar = false; // se activa mediante el animador.
+            banderaPrimerTiradaArma = false;
         }
 
 
@@ -61,6 +67,7 @@ public class ManejadorArmas_controller : MonoBehaviour
     }
     public void TirarArma()
     {
+
         armado = false;
         armadoAntes = false;
         ManoASeguir = null;
@@ -84,6 +91,7 @@ public class ManejadorArmas_controller : MonoBehaviour
 
         ArmaActual.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         Invoke("TiradaLogica", 1f);
+
     }
 
     private void TiradaLogica()
