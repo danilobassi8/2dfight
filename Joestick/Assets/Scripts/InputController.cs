@@ -11,13 +11,17 @@ public class InputController : MonoBehaviour
 
     private string identificador;
 
-
-    void Start()
+    void Awake()
     {
-        Joestick1.numero = 1;   // se utilizan solamente para el identificador.
+        Joestick1.numero = 1;   // se utilizan para identificar al Joestick.
         Joestick2.numero = 2;
         Joestick3.numero = 3;
         Joestick4.numero = 4;
+    }
+
+    void Start()
+    {
+
     }
 
     void Update()
@@ -26,7 +30,7 @@ public class InputController : MonoBehaviour
         Check_Botones(Joestick2);
         Check_Botones(Joestick3);
         Check_Botones(Joestick4);
-        
+
 
 
         Check_Analogic(Joestick1);
@@ -140,7 +144,6 @@ public class InputController : MonoBehaviour
         }
         if (Input.GetAxisRaw("Start" + identificador) == 1)
         {
-            Debug.Log("Start");
             Joestick.Start = true;
         }
         else

@@ -908,21 +908,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1667a8945ce795f45ad7ee3f9da73b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factorLimitante: 0
-  b1: 0
-  b2: 0
-  b3: 0
-  b4: 0
-  farriba: 0
-  fabajo: 0
-  fizquierda: 0
-  fderecha: 0
-  LT: 0
-  LB: 0
-  RB: 0
-  RT: 0
-  direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
-  direccionJoestickDerecho: {x: 0, y: 0, z: 0}
+  Joestick1:
+    numero: 0
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    Start: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
+  Joestick2:
+    numero: 0
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    Start: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
+  Joestick3:
+    numero: 0
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    Start: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
+  Joestick4:
+    numero: 0
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    Start: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
 --- !u!114 &114947076389381612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -934,21 +987,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1667a8945ce795f45ad7ee3f9da73b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factorLimitante: 0
-  b1: 0
-  b2: 0
-  b3: 0
-  b4: 0
-  farriba: 0
-  fabajo: 0
-  fizquierda: 0
-  fderecha: 0
-  LT: 0
-  LB: 0
-  RB: 0
-  RT: 0
-  direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
-  direccionJoestickDerecho: {x: 0, y: 0, z: 0}
+  Joestick1:
+    numero: 0
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    Start: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
+  Joestick2:
+    numero: 0
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    Start: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
+  Joestick3:
+    numero: 0
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    Start: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
+  Joestick4:
+    numero: 0
+    b1: 0
+    b2: 0
+    b3: 0
+    b4: 0
+    farriba: 0
+    fabajo: 0
+    fizquierda: 0
+    fderecha: 0
+    LT: 0
+    LB: 0
+    RB: 0
+    RT: 0
+    Start: 0
+    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
+    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
 --- !u!212 &212053853645387314
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -566,11 +566,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4854826520417448, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -33
+      value: -27.1
       objectReference: {fileID: 0}
     - target: {fileID: 4854826520417448, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.9
+      value: 32.2
       objectReference: {fileID: 0}
     - target: {fileID: 4854826520417448, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_LocalPosition.z
@@ -602,19 +602,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1354538596798310, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1363114384169758, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1098730700159830, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1635319254288808, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 148b53fb2dfe20f429a318b8ad442487, type: 2}
@@ -658,117 +658,71 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114073160282866552, guid: c9155ebfb0df03a469be20706b473559,
+        type: 2}
+      propertyPath: colorChidori.r
+      value: 0.015686274
+      objectReference: {fileID: 0}
+    - target: {fileID: 114073160282866552, guid: c9155ebfb0df03a469be20706b473559,
+        type: 2}
+      propertyPath: colorChidori.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114073160282866552, guid: c9155ebfb0df03a469be20706b473559,
+        type: 2}
+      propertyPath: colorChidori.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114248619173766616, guid: c9155ebfb0df03a469be20706b473559,
+        type: 2}
+      propertyPath: SelectedSkin
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9155ebfb0df03a469be20706b473559, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1471388223
-GameObject:
+--- !u!1001 &1280688173
+Prefab:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1471388225}
-  - component: {fileID: 1471388224}
-  m_Layer: 0
-  m_Name: Joestick Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1471388224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1471388223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1667a8945ce795f45ad7ee3f9da73b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Joestick1:
-    numero: 0
-    b1: 0
-    b2: 0
-    b3: 0
-    b4: 0
-    farriba: 0
-    fabajo: 0
-    fizquierda: 0
-    fderecha: 0
-    LT: 0
-    LB: 0
-    RB: 0
-    RT: 0
-    Start: 0
-    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
-    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
-  Joestick2:
-    numero: 0
-    b1: 0
-    b2: 0
-    b3: 0
-    b4: 0
-    farriba: 0
-    fabajo: 0
-    fizquierda: 0
-    fderecha: 0
-    LT: 0
-    LB: 0
-    RB: 0
-    RT: 0
-    Start: 0
-    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
-    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
-  Joestick3:
-    numero: 0
-    b1: 0
-    b2: 0
-    b3: 0
-    b4: 0
-    farriba: 0
-    fabajo: 0
-    fizquierda: 0
-    fderecha: 0
-    LT: 0
-    LB: 0
-    RB: 0
-    RT: 0
-    Start: 0
-    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
-    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
-  Joestick4:
-    numero: 0
-    b1: 0
-    b2: 0
-    b3: 0
-    b4: 0
-    farriba: 0
-    fabajo: 0
-    fizquierda: 0
-    fderecha: 0
-    LT: 0
-    LB: 0
-    RB: 0
-    RT: 0
-    Start: 0
-    direccionJoestickIzquierdo: {x: 0, y: 0, z: 0}
-    direccionJoestickDerecho: {x: 0, y: 0, z: 0}
---- !u!4 &1471388225
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1471388223}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.695015, y: 7.055811, z: -0.875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4450100904323378, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -41.695015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450100904323378, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7.055811
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450100904323378, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450100904323378, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450100904323378, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450100904323378, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450100904323378, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450100904323378, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 25e4af9b8287c584c9f3e9109cc44ec9, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1472489325
 GameObject:
   m_ObjectHideFlags: 0

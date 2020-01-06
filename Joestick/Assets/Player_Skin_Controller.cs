@@ -25,7 +25,11 @@ public class Player_Skin_Controller : MonoBehaviour
             {
                 SelectedSkin = SelectedSkin - Skins.Length;
             }
-        }//
+        }
+        if (SelectedSkin < 0)
+        {
+            SelectedSkin = SelectedSkin + Skins.Length;
+        }
         CambiaSkin(this.gameObject, SelectedSkin);
     }
 
@@ -38,6 +42,10 @@ public class Player_Skin_Controller : MonoBehaviour
             {
                 SelectedSkin = SelectedSkin - Skins.Length;
             }
+        }
+        if (SelectedSkin < 0)
+        {
+            SelectedSkin = SelectedSkin + Skins.Length;
         }//
 
         //veo si cambio el numero del skin. De esta manera tambien puedo cambiar el skin en tiempo de ejecucion.
