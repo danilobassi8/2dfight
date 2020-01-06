@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
-  m_VerticalAxis: flechasVertical
-  m_SubmitButton: 3Button
+  m_VerticalAxis: flechasVertical_j1
+  m_SubmitButton: 3Button_j1
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5

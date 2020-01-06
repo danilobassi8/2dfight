@@ -24,12 +24,15 @@ public class InputController : MonoBehaviour
     {
         Check_Botones(Joestick1);
         Check_Botones(Joestick2);
-        //activar los joestick 2,3 y 4 cuando esten listos.
+        Check_Botones(Joestick3);
+        Check_Botones(Joestick4);
+        
 
 
         Check_Analogic(Joestick1);
         Check_Analogic(Joestick2);
-        //activar los joestick 2,3 y 4 cuando esten listos.
+        Check_Analogic(Joestick3);
+        Check_Analogic(Joestick4);
 
 
     }

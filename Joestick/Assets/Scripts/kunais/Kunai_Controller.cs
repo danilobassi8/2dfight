@@ -110,7 +110,7 @@ public class Kunai_Controller : MonoBehaviour
 
 
         lanzando = true;
-
+        
 
     }
 
@@ -144,7 +144,8 @@ public class Kunai_Controller : MonoBehaviour
         {
             this.transform.position = posicionFinal;
         }
-        else // cuando el kunai se rompe.
+
+        if (kunaiRoto) // cuando el kunai se rompe.
         {
             if (bandera1)//primera vez que entra en la condicion.
             {
@@ -189,7 +190,7 @@ public class Kunai_Controller : MonoBehaviour
             if (col.transform.root.gameObject.name == "escudo")
             {
                 KunaiSeRompe();
-
+                lanzando = false;
             }
 
 

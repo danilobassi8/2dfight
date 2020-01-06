@@ -20,7 +20,6 @@ public class escudo_controller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
-
+        
     }
 }
