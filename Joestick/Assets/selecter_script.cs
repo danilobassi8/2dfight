@@ -75,6 +75,7 @@ public class selecter_script : MonoBehaviour
             PintaSelecter(Color.black);
         }
 
+
     }
 
     public void PintaSelecter()
@@ -82,6 +83,7 @@ public class selecter_script : MonoBehaviour
         // Metodo que pinta el selecter del color del jugador.
         Color color = SeleccionDeColor(player.GetComponent<Player_Skin_Controller>().SelectedSkin);
 
+        this.colorJugador = color;
         this.gameObject.transform.Find("triangulo DER").GetComponent<SpriteRenderer>().color = color;
         this.gameObject.transform.Find("triangulo IZQ").GetComponent<SpriteRenderer>().color = color;
         this.gameObject.transform.Find("box").GetComponent<SpriteRenderer>().color = color;
@@ -90,6 +92,7 @@ public class selecter_script : MonoBehaviour
     {
         // Metodo que pinta el selecter del color del jugador.
         color.a = 1f;
+        this.colorJugador = color;
         this.gameObject.transform.Find("triangulo DER").GetComponent<SpriteRenderer>().color = color;
         this.gameObject.transform.Find("triangulo IZQ").GetComponent<SpriteRenderer>().color = color;
         this.gameObject.transform.Find("box").GetComponent<SpriteRenderer>().color = color;
@@ -122,9 +125,9 @@ public class selecter_script : MonoBehaviour
                 colorJugador.b = 0;
                 break;
             case 4:
-                colorJugador.r = 1;
-                colorJugador.g = 0.4945983f;
-                colorJugador.b = 0;
+                colorJugador.r = 0.6981f;
+                colorJugador.g = 0.1855f;
+                colorJugador.b = 0f;
                 break;
             default:
                 colorJugador = Color.black;
