@@ -25,11 +25,7 @@ public class AudioManagerScript : MonoBehaviour
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.clip.name == name);
-        
         s.source.Play();
-
-
-
     }
 }
 

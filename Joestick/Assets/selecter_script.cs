@@ -14,6 +14,7 @@ public class selecter_script : MonoBehaviour
     public bool locked;
 
 
+
     void Start()
     {
         timer = tiempoEntreSeleccion;
@@ -46,34 +47,56 @@ public class selecter_script : MonoBehaviour
 
     void Update()
     {
-        if (timer <= 0 && habilitado)
+        if (locked == false)
         {
-            if (joestick.fderecha || joestick.direccionJoestickDerecho.x > 0)
+            if (timer <= 0 && habilitado)
             {
-                player.GetComponent<Player_Skin_Controller>().SelectedSkin = player.GetComponent<Player_Skin_Controller>().SelectedSkin + 1;
-                timer = tiempoEntreSeleccion;
+                if (joestick.fderecha || joestick.direccionJoestickIzquierdo.x > 0)
+                {
+                    player.GetComponent<Player_Skin_Controller>().SelectedSkin = player.GetComponent<Player_Skin_Controller>().SelectedSkin + 1;
+                    timer = tiempoEntreSeleccion;
+                    Invoke("PintaSelecter", 0.05f);
+                }
+                if (joestick.fizquierda || joestick.direccionJoestickIzquierdo.x < 0)
+                {
+                    player.GetComponent<Player_Skin_Controller>().SelectedSkin = player.GetComponent<Player_Skin_Controller>().SelectedSkin - 1;
+                    timer = tiempoEntreSeleccion;
+                    Invoke("PintaSelecter", 0.05f);
+                }
+            }
+            else //mayor a 0
+            {
+                timer -= Time.deltaTime;
+            }
+
+            if (habilitado)
+            {
                 Invoke("PintaSelecter", 0.05f);
             }
-            if (joestick.fizquierda || joestick.direccionJoestickDerecho.x < 0)
+            else
             {
-                player.GetComponent<Player_Skin_Controller>().SelectedSkin = player.GetComponent<Player_Skin_Controller>().SelectedSkin - 1;
-                timer = tiempoEntreSeleccion;
-                Invoke("PintaSelecter", 0.05f);
+                PintaSelecter(Color.black);
+            }
+            if (habilitado && joestick.b3)
+            {
+                locked = true;
+                //reproduce animacion de entrada.
+                this.gameObject.transform.Find("OK").GetComponent<Animator>().SetBool("OK", true);
             }
         }
-        else //mayor a 0
+        else // (locked == true)
         {
-            timer -= Time.deltaTime;
+            if (joestick.b2)
+            {
+                locked = false;
+                habilitado = true;
+                this.gameObject.transform.Find("OK").GetComponent<Animator>().SetBool("OK", false);
+
+            }
         }
 
-        if (habilitado)
-        {
-            Invoke("PintaSelecter", 0.05f);
-        }
-        else
-        {
-            PintaSelecter(Color.black);
-        }
+
+
 
 
     }

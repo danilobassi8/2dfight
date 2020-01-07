@@ -9,6 +9,7 @@ public class UI_seleccionPersonajes : MonoBehaviour
     private GameObject playerCuerpo;
 
     private _Joestick joestick1, joestick2, joestick3, joestick4;
+    private float timer;
 
     void Start()
     {
@@ -24,7 +25,6 @@ public class UI_seleccionPersonajes : MonoBehaviour
         joestick2 = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick2;
         joestick3 = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick3;
         joestick4 = GameObject.Find("Joestick Controller").GetComponent<InputController>().Joestick4;
-
     }
 
     void Update()
@@ -35,7 +35,8 @@ public class UI_seleccionPersonajes : MonoBehaviour
         ChekeaHabilitacion(joestick3);
         ChekeaHabilitacion(joestick4);
 
-
+        if (timer >= 0)
+            timer -= Time.deltaTime;
     }
 
     public void ChekeaHabilitacion(_Joestick joestick)
@@ -43,14 +44,21 @@ public class UI_seleccionPersonajes : MonoBehaviour
         if (joestick.Start)
         {
             PintarJugador(GameObject.Find("Players/Player" + joestick.numero.ToString()), Color.white);
-                        GameObject.Find("Selecter"+ joestick.numero.ToString()).GetComponent<selecter_script>().habilitado = true;
-
+            GameObject.Find("Selecter" + joestick.numero.ToString()).GetComponent<selecter_script>().habilitado = true;
         }
         if (joestick.b2)
         {
-            PintarJugador(GameObject.Find("Players/Player" + joestick.numero.ToString()), Color.black);
-            PintaSelecter(GameObject.Find("Selecter"+ joestick.numero.ToString()),Color.black);
-            GameObject.Find("Selecter"+ joestick.numero.ToString()).GetComponent<selecter_script>().habilitado = false;
+            if (GameObject.Find("Selecter" + joestick.numero.ToString()).GetComponent<selecter_script>().locked == true)
+            {
+                timer = 0.8f;
+            }
+            if (timer <= 0)
+            {
+                PintarJugador(GameObject.Find("Players/Player" + joestick.numero.ToString()), Color.black);
+                PintaSelecter(GameObject.Find("Selecter" + joestick.numero.ToString()), Color.black);
+                GameObject.Find("Selecter" + joestick.numero.ToString()).GetComponent<selecter_script>().habilitado = false;
+            }
+
         }
     }
 
@@ -65,12 +73,18 @@ public class UI_seleccionPersonajes : MonoBehaviour
         playerCuerpo.transform.Find("mano DER").GetComponent<SpriteRenderer>().color = color;
         playerCuerpo.transform.Find("mano IZQ").GetComponent<SpriteRenderer>().color = color;
     }
+
     public void PintaSelecter(GameObject selecter, Color color)
     {
         color.a = 1f;
 
-        selecter.transform.Find("triangulo DER").GetComponent<SpriteRenderer>().color = color; 
-        selecter.transform.Find("triangulo IZQ").GetComponent<SpriteRenderer>().color = color; 
-        selecter.transform.Find("box").GetComponent<SpriteRenderer>().color = color; 
+        selecter.transform.Find("triangulo DER").GetComponent<SpriteRenderer>().color = color;
+        selecter.transform.Find("triangulo IZQ").GetComponent<SpriteRenderer>().color = color;
+        selecter.transform.Find("box").GetComponent<SpriteRenderer>().color = color;
+    }
+
+    private void ReproduceSonido(string nombreSonido)
+    {
+        this.gameObject.GetComponent<AudioManagerScript>().Play(nombreSonido);
     }
 }
