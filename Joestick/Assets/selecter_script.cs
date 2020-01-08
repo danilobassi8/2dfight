@@ -8,10 +8,13 @@ public class selecter_script : MonoBehaviour
 
     private _Joestick joestick;
     private GameObject player;
-    private float timer;
+    private float timer; // se usa para el tiempo entre seleccion.
     public Color colorJugador;
     public bool habilitado;
     public bool locked;
+
+    public float tiempoEntreBacks;
+    public float timerBack;
 
 
 
@@ -47,6 +50,9 @@ public class selecter_script : MonoBehaviour
 
     void Update()
     {
+        if (timerBack > 0)
+            timerBack -= Time.deltaTime;
+
         if (locked == false)
         {
             if (timer <= 0 && habilitado)
@@ -84,16 +90,27 @@ public class selecter_script : MonoBehaviour
                 this.gameObject.transform.Find("OK").GetComponent<Animator>().SetBool("OK", true);
                 ReproduceSonido("entrada");
             }
+            if (joestick.b2 && timerBack <= 0)
+            {
+                GameObject.Find("ControladorUI").GetComponent<UI_seleccionPersonajes>().PintarJugador(player, Color.black);
+                GameObject.Find("ControladorUI").GetComponent<UI_seleccionPersonajes>().PintaSelecter(this.gameObject, Color.black);
+                habilitado = false;
+                timerBack = tiempoEntreBacks;
+
+            }
         }
         else // (locked == true)
         {
-            if (joestick.b2)
+            if (joestick.b2 && timerBack <= 0)
             {
                 locked = false;
                 habilitado = true;
                 this.gameObject.transform.Find("OK").GetComponent<Animator>().SetBool("OK", false);
                 ReproduceSonido("salida");
+                timerBack = tiempoEntreBacks;
+
             }
+
         }
 
 

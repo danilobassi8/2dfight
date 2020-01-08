@@ -7,6 +7,7 @@ public class UI_seleccionPersonajes : MonoBehaviour
 
     private GameObject Players;
     private GameObject playerCuerpo;
+    public float tiempoEntreBacks;
 
     private _Joestick joestick1, joestick2, joestick3, joestick4;
     private float timer;
@@ -29,6 +30,7 @@ public class UI_seleccionPersonajes : MonoBehaviour
 
     void Update()
     {
+
         //chekea si los jugadores estan start o no.
         ChekeaHabilitacion(joestick1);
         ChekeaHabilitacion(joestick2);
@@ -46,11 +48,11 @@ public class UI_seleccionPersonajes : MonoBehaviour
             PintarJugador(GameObject.Find("Players/Player" + joestick.numero.ToString()), Color.white);
             GameObject.Find("Selecter" + joestick.numero.ToString()).GetComponent<selecter_script>().habilitado = true;
         }
-        if (joestick.b2)
+       /* if (joestick.b2)
         {
+
             if (GameObject.Find("Selecter" + joestick.numero.ToString()).GetComponent<selecter_script>().locked == true)
             {
-                timer = 0.8f;
             }
             if (timer <= 0)
             {
@@ -59,7 +61,11 @@ public class UI_seleccionPersonajes : MonoBehaviour
                 GameObject.Find("Selecter" + joestick.numero.ToString()).GetComponent<selecter_script>().habilitado = false;
             }
 
-        }
+        }*/
+    }
+    private void InhabilitaPlayer()
+    {
+
     }
 
     public void PintarJugador(GameObject player, Color color)
