@@ -82,6 +82,7 @@ public class selecter_script : MonoBehaviour
                 locked = true;
                 //reproduce animacion de entrada.
                 this.gameObject.transform.Find("OK").GetComponent<Animator>().SetBool("OK", true);
+                ReproduceSonido("entrada");
             }
         }
         else // (locked == true)
@@ -91,7 +92,7 @@ public class selecter_script : MonoBehaviour
                 locked = false;
                 habilitado = true;
                 this.gameObject.transform.Find("OK").GetComponent<Animator>().SetBool("OK", false);
-
+                ReproduceSonido("salida");
             }
         }
 
@@ -161,4 +162,11 @@ public class selecter_script : MonoBehaviour
         colorJugador.a = 1f;
         return colorJugador;
     }
+
+    void ReproduceSonido(string s)
+    {
+        this.gameObject.transform.Find("OK").gameObject.GetComponent<AudioManagerScript>().Play(s);
+    }
+
+
 }
