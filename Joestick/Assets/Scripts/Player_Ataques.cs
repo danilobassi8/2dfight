@@ -24,7 +24,7 @@ public class Player_Ataques : MonoBehaviour
     private Rigidbody2D rb;
     private GameObject chekeadorPiso;
     //variables para el chidori
-    private bool doingChidori, chidorispawned;
+    public bool doingChidori, chidorispawned;
     public float contadorChidori;
     private string PlayerName;
     private bool instanciaChidori;
@@ -33,13 +33,13 @@ public class Player_Ataques : MonoBehaviour
 
     //variables para los kunais
     private GameObject kunaiSpawner;
-    private bool doingKunais = false;
+    public bool doingKunais = false;
     private float clockKunais;
     public float clockHabilitacionKunai;
 
     //variables para los ataques normales.
     private bool banderaPrimerPiña;
-    private bool doingPiñas;
+    public bool doingPiñas;
     private Transform puntoPiñas;
 
     //variables para la transformacion.
@@ -177,7 +177,7 @@ public class Player_Ataques : MonoBehaviour
 
     public void Manejador_Chidori()
     {
-        if (joestick.b1 && chidorispawned == false && nombreAnimacionActual != "player1_chidori_middle" && doingKunais == false && banderaPrimerCastChidori && doingPiñas == false && doingEscudo == false) //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
+        if (joestick.b1 && chidorispawned == false && nombreAnimacionActual != "player1_chidori_middle" && doingKunais == false && banderaPrimerCastChidori && doingPiñas == false && doingEscudo == false && nombreAnimacionActual != "Player_TiraArma") //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
         {
             doingChidori = true;
             banderaPrimerCastChidori = false;
@@ -234,7 +234,7 @@ public class Player_Ataques : MonoBehaviour
     {
         tocandoPiso = this.transform.Find("ChekeadorPiso").gameObject.GetComponent<chekeadorPiso>().tocandoPiso;
 
-        if (joestick.LT && doingChidori == false && doingPiñas == false && clockKunais < 0 && clockHabilitacionKunai < 0 && doingEscudo == false)
+        if (joestick.LT && doingChidori == false && doingPiñas == false && clockKunais < 0 && clockHabilitacionKunai < 0 && doingEscudo == false && nombreAnimacionActual != "Player_TiraArma")
         {
             doingKunais = true;
             clockHabilitacionKunai = HabilitacionKunai;
@@ -297,7 +297,7 @@ public class Player_Ataques : MonoBehaviour
 
     void Manejador_AtaquesNormales()
     {
-        if (joestick.b4 && doingChidori == false && doingKunais == false && banderaPrimerPiña && doingPiñas == false && doingEscudo == false)
+        if (joestick.b4 && doingChidori == false && doingKunais == false && banderaPrimerPiña && doingPiñas == false && doingEscudo == false && nombreAnimacionActual != "Player_TiraArma")
         {
             animator.SetBool("pegandoGeneral", true);
             animator.SetTrigger("pegandoTrigger");
@@ -321,7 +321,7 @@ public class Player_Ataques : MonoBehaviour
     public void Manejador_Boludeces()
     {
         //new animation se llama la animacion por defecto.. si, mala mía.
-        if (joestick.fabajo && doingChidori == false && doingKunais == false && doingEscudo == false)
+        if (joestick.fabajo && doingChidori == false && doingKunais == false && doingEscudo == false && nombreAnimacionActual != "Player_TiraArma")
         {
             if ((nombreAnimacionActual == "New Animation" || nombreAnimacionActual == "Player_idle_YBAILO"))
                 animator.SetBool("ybailo", true);
@@ -400,7 +400,7 @@ public class Player_Ataques : MonoBehaviour
 
     void Manejador_Escudo()
     {
-        if (joestick.b2 && doingKunais == false && doingPiñas == false && doingEscudo == false && doingChidori == false && clockescudo < 0 && clockEntreEscudos >= tiempoEntreEscudo)
+        if (joestick.b2 && doingKunais == false && doingPiñas == false && doingEscudo == false && doingChidori == false && clockescudo < 0 && clockEntreEscudos >= tiempoEntreEscudo && nombreAnimacionActual != "Player_TiraArma")
         {
             doingEscudo = true;
             clockescudo = duracionEscudo;

@@ -14,10 +14,12 @@ public class ManejadorArmas_controller : MonoBehaviour
     private bool armadoAntes; //variable para saber cuando es la primera vez que se arma.
     private GameObject ManoASeguir;
     private bool banderaPrimerTiradaArma;
+    private GameObject Player;
 
     void Start()
     {
         banderaPrimerTiradaArma = false;
+        Player = this.transform.root.gameObject;
     }
 
     void Update()
@@ -37,7 +39,7 @@ public class ManejadorArmas_controller : MonoBehaviour
 
             }
 
-            if (this.transform.root.gameObject.GetComponent<Player1_controller>().joestick.RB && banderaPrimerTiradaArma == false)
+            if (Player.GetComponent<Player1_controller>().joestick.RB && banderaPrimerTiradaArma == false && Player.GetComponent<Player_Ataques>().doingEscudo == false && Player.GetComponent<Player_Ataques>().doingChidori == false && Player.GetComponent<Player_Ataques>().doingKunais == false && Player.GetComponent<Player_Ataques>().doingPiñas == false)
             {
                 ArmaActual.GetComponent<arma_general_script>().Invocador.GetComponent<Animator>().SetTrigger("TiraArma");
                 banderaPrimerTiradaArma = true;
