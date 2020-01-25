@@ -77,9 +77,13 @@ public class Player_recibeAtaques : MonoBehaviour
         }
     }
 
-    private void PonerRigidbodyEnDynamic()
+    private void PonerRigidbodyEnDynamic() // ESTO METODO SOLO DEBE SER INVOCADO PARA TERMINAR LA ANIMACION DEL GOLPE DEL CHIDORI. PARA NADA MAS.
     {
+        //pongo el rigidbody en Dynamic.
         this.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+
+        //le cancelo el chidori
+        PlayerMeTaPegando.GetComponent<Player_Ataques>().contadorChidori = 0;
     }
 
 
