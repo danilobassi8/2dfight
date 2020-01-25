@@ -90,7 +90,7 @@ public class Player_Ataques : MonoBehaviour
     {
         PlayerName = this.transform.root.gameObject.name;
 
-        animator = GetComponent<Animator>(); ;
+        animator = GetComponent<Animator>(); 
         chidorispawned = false;
 
         string nroPlayer = this.gameObject.name[this.gameObject.name.Length - 1].ToString();
@@ -171,8 +171,6 @@ public class Player_Ataques : MonoBehaviour
 
         }
         return "empty";
-
-
     }
 
     public void Manejador_Chidori()

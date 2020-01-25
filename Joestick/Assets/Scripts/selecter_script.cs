@@ -151,9 +151,9 @@ public class selecter_script : MonoBehaviour
                 colorJugador.b = 1;
                 break;
             case 1:
-                colorJugador.r = 0.490566f;
-                colorJugador.g = 0.01619794f;
-                colorJugador.b = 0.06702313f;
+                colorJugador.r = 0.7075472f;
+                colorJugador.g = 0.01668743f;
+                colorJugador.b = 0.09091208f;
                 break;
             case 2:
                 colorJugador.r = 0.9245283f;

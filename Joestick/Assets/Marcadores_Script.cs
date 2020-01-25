@@ -23,6 +23,7 @@ public class Marcadores_Script : MonoBehaviour
             colorJugador = Player.GetComponent<Player_Ataques>().colorChidori;
             colorJugador.a = 1f;
             this.transform.Find("Colores").GetComponent<Image>().color = colorJugador;
+			this.transform.Find("Vida").GetComponent<Image>().color = colorJugador;
 
             TazoActivo(Player.GetComponent<Player_Skin_Controller>().Skins[Player.GetComponent<Player_Skin_Controller>().SelectedSkin].Nombre);
             //mando por parametro el nombre del skin seleccionado del player.
