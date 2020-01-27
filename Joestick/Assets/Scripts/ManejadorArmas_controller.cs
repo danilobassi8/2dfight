@@ -101,4 +101,24 @@ public class ManejadorArmas_controller : MonoBehaviour
         ArmaActual.GetComponent<arma_general_script>().agarrada = false;
 
     }
+
+    public void SueltaArma()
+    {//todabia no se usa.
+        Debug.Log(this.gameObject.transform.root.name + "TIRANDO ARMA = " + this.ArmaActual.name);
+
+        armado = false;
+        armadoAntes = false;
+        ManoASeguir = null;
+
+        ArmaActual.GetComponent<arma_general_script>().lanzada = true;
+        ArmaActual.GetComponent<arma_general_script>().agarrada = false;
+        ArmaActual.GetComponent<arma_general_script>().NoSePuedeAgarrar = 3f;
+
+        ArmaActual.GetComponent<Rigidbody2D>().velocity = new Vector2(0, FuerzaDeTiradoDeArma );
+        ArmaActual.GetComponent<Rigidbody2D>().AddTorque(Torque);
+
+        ArmaActual.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        
+
+    }
 }

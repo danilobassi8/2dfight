@@ -90,7 +90,7 @@ public class Player_Ataques : MonoBehaviour
     {
         PlayerName = this.transform.root.gameObject.name;
 
-        animator = GetComponent<Animator>(); 
+        animator = GetComponent<Animator>();
         chidorispawned = false;
 
         string nroPlayer = this.gameObject.name[this.gameObject.name.Length - 1].ToString();
@@ -177,6 +177,8 @@ public class Player_Ataques : MonoBehaviour
     {
         if (joestick.b1 && chidorispawned == false && nombreAnimacionActual != "player1_chidori_middle" && doingKunais == false && banderaPrimerCastChidori && doingPiñas == false && doingEscudo == false && nombreAnimacionActual != "Player_TiraArma") //primera vez que hace el chidori. (contemplar cuando se puede o no hacer.)
         {
+            this.gameObject.GetComponent<Animator>().ResetTrigger("chidori_HIT"); //para que no quede guardada ninguna animacion de chidori de antes.
+
             doingChidori = true;
             banderaPrimerCastChidori = false;
 

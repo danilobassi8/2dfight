@@ -10,9 +10,12 @@ public class arma_general_script : MonoBehaviour
     public bool puedeDañar = false;
     public bool lanzada = false;
 
+    public float NoSePuedeAgarrar;
+
     // Use this for initialization
     void Start()
     {
+        NoSePuedeAgarrar = 0;
         this.gameObject.tag = "Armas";
 
     }
@@ -29,33 +32,40 @@ public class arma_general_script : MonoBehaviour
         {
 
         }
+
+
+        if (NoSePuedeAgarrar > 0)
+            NoSePuedeAgarrar -= Time.deltaTime;
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
-        if (agarrada == false)
+        if (NoSePuedeAgarrar <= 0)
         {
-            if (col.tag == "Player")
+            if (agarrada == false)
             {
-                if (col.gameObject.transform.root.transform.Find("ManejadorArmas").GetComponent<ManejadorArmas_controller>().armado == false) // si no tiene una ya agarrada de antes.
+                if (col.tag == "Player")
                 {
-                    Invocador = col.transform.root.gameObject;
-                    agarrada = true;
-                    lanzada = false;
+                    if (col.gameObject.transform.root.transform.Find("ManejadorArmas").GetComponent<ManejadorArmas_controller>().armado == false) // si no tiene una ya agarrada de antes.
+                    {
+                        Invocador = col.transform.root.gameObject;
+                        agarrada = true;
+                        lanzada = false;
 
-                    this.gameObject.transform.SetParent(null);
-                    Invocador.transform.root.gameObject.transform.Find("ManejadorArmas").gameObject.GetComponent<ManejadorArmas_controller>().Armar(this.gameObject);
+                        this.gameObject.transform.SetParent(null);
+                        Invocador.transform.root.gameObject.transform.Find("ManejadorArmas").gameObject.GetComponent<ManejadorArmas_controller>().Armar(this.gameObject);
 
-                    return;
+                        return;
+                    }
+
                 }
+            }
+            else // si la tiene el player (invocador) en la mano.
+            {
 
             }
         }
-        else // si la tiene el player (invocador) en la mano.
-        {
 
-        }
     }
 
 }

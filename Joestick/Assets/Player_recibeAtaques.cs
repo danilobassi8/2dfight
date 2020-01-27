@@ -13,6 +13,8 @@ public class Player_recibeAtaques : MonoBehaviour
     public GameObject PlayerMeTaPegando;
     public float clock;
     public float tiempoEspera = 0.1f;
+    public float TiempoRigidDinamic, contadorChidoriPostPiña, tamañoParticulasPostPiña;
+    private ParticleSystem ps;
 
     void Start()
     {
@@ -30,7 +32,9 @@ public class Player_recibeAtaques : MonoBehaviour
         if (siendoChidoriado)
         {
             this.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            Invoke("PonerRigidbodyEnDynamic", 1.54f);
+
+            Invoke("CancelarChidori", contadorChidoriPostPiña);
+            Invoke("PonerRigidbodyEnDynamic", TiempoRigidDinamic);
 
             PlayerMeTaPegando.GetComponent<Animator>().SetTrigger("chidori_HIT");
             this.gameObject.GetComponent<Animator>().SetTrigger("chidori_HITED");
@@ -38,9 +42,12 @@ public class Player_recibeAtaques : MonoBehaviour
             siendoChidoriado = false;
         }
 
+        if (this.gameObject.GetComponent<Player_Ataques>().nombreAnimacionActual == "Player_chidori_HITED")
+            this.gameObject.GetComponent<Animator>().ResetTrigger("chidori_HITED");
 
-        //tengo que seguir desde acá. activar animaciones y todo eso.
-        // poner un actuador (bandera) o algo cuando se active por primera vez el "Siendo chidoriado" y a partir de ahí activar animaciones y jugar con los rigidbody 
+
+
+
 
 
     }
@@ -52,10 +59,20 @@ public class Player_recibeAtaques : MonoBehaviour
             if (col.transform.root.tag == "Player")
             {
                 //esto es si recive el ataque del chidori de otro Player.
-                if (col.transform.root.GetComponent<Player_Ataques>().doingChidori == true && scriptAtaques.doingChidori == false && scriptAtaques.doingEscudo == false && siendoChidoriado == false)
+                if (col.transform.root.GetComponent<Player_Ataques>().doingChidori == true && col.transform.root.GetComponent<Player_Ataques>().contadorChidori <= 5 && scriptAtaques.doingChidori == false && scriptAtaques.doingEscudo == false && siendoChidoriado == false)
                 {
                     PlayerMeTaPegando = col.transform.root.gameObject;
                     siendoChidoriado = true;
+
+                    //agrando el tamaño del efecto del chidori.
+                    ps = GameObject.Find(PlayerMeTaPegando.name + "_ParticulasChidori").GetComponent<ParticleSystem>();
+                    var main = ps.main;
+                    main.startSize = tamañoParticulasPostPiña;
+
+
+                    //le hago dropear el arma al que le pegan. 
+                    if (this.gameObject.transform.Find("ManejadorArmas").GetComponent<ManejadorArmas_controller>().ArmaActual != null)
+                        this.gameObject.transform.Find("ManejadorArmas").GetComponent<ManejadorArmas_controller>().SueltaArma(); 
                 }
             }
 
@@ -82,69 +99,20 @@ public class Player_recibeAtaques : MonoBehaviour
         //pongo el rigidbody en Dynamic.
         this.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-        //le cancelo el chidori
-        PlayerMeTaPegando.GetComponent<Player_Ataques>().contadorChidori = 0;
+
     }
-
-
-
-    /* -- ASI ERA ANTES.
-
-void Update()
+    private void CancelarChidori()
     {
+        //le cancelo el chidori
+        PlayerMeTaPegando.GetComponent<Player_Ataques>().contadorChidori = contadorChidoriPostPiña;
+        PlayerMeTaPegando.GetComponent<Player_Ataques>().doingChidori = false;
+        if (GameObject.Find(PlayerMeTaPegando.name + "_Chidori") != null)
+            Destroy(GameObject.Find(PlayerMeTaPegando.name + "_Chidori"));
 
+        //reseteo los triggers.
 
-        nombreAnimacionActual = scriptAtaques.nombreAnimacionActual;
-
-        if (siendoChidoriado == true)
-        {
-            if (clock <= 0)
-            {
-                if (nombreAnimacionActual != "Player_chidori_HITED")
-                {
-                    siendoChidoriado = false;
-                }
-            }
-            else
-            {
-
-                clock -= Time.deltaTime;
-            }
-
-        }
-
-
+        PlayerMeTaPegando.GetComponent<Animator>().ResetTrigger("chidori_HIT");
+        this.gameObject.GetComponent<Animator>().ResetTrigger("chidori_HITED");
     }
-
-
-
-    void OnCollisionEnter2D(Collision2D col)
-        {
-            if (col.transform.root != null)
-            {
-
-
-                if (col.transform.root.tag == "Player")
-                {
-                    //esto es si recive el ataque del chidori de otro Player.
-                    if (col.transform.root.GetComponent<Player_Ataques>().doingChidori == true && scriptAtaques.doingChidori == false && scriptAtaques.doingEscudo == false && siendoChidoriado == false)
-                    {
-                        siendoChidoriado = true;
-
-                        Debug.Log("ENTRE INT");
-                        col.transform.root.GetComponent<Animator>().SetTrigger("chidori_HIT");
-                        this.gameObject.GetComponent<Animator>().SetTrigger("chidori_HITED");
-                    }
-                }
-
-            }
-
-    */
-
-
-
-
-
-
 
 }

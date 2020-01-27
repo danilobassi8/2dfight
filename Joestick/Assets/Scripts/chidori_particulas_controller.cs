@@ -15,6 +15,7 @@ public class chidori_particulas_controller : MonoBehaviour
 
     void Start()
     {
+        this.gameObject.name = "Player" + master.name[6] + "_ParticulasChidori";
 
         this.transform.position = master.transform.position;
 
@@ -26,7 +27,7 @@ public class chidori_particulas_controller : MonoBehaviour
 
 
         if (this.gameObject.name != "seguidorMano")
-            GameObject.Destroy(this.gameObject, 10f);
+            GameObject.Destroy(this.gameObject, 8f);
 
 
     }
