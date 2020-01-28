@@ -17,7 +17,7 @@ public class arma_general_script : MonoBehaviour
     {
         NoSePuedeAgarrar = 0;
         this.gameObject.tag = "Armas";
-
+        this.gameObject.layer = 0;
     }
 
     // Update is called once per frame
